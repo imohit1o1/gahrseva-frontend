@@ -14,52 +14,56 @@ const ICON_MAP: Record<string, LucideIcon> = {
 
 export function Solution() {
     return (
-        <section className="py-14 sm:py-16">
-            <div className="flex flex-col gap-16">
+        <section className="py-8 sm:py-12 relative px-4 sm:px-0">
+            {/* Subtle background glow */}
+            <div className="absolute top-0 right-0 -z-10 h-[500px] w-[500px] bg-primary/5 blur-[100px] rounded-full pointer-events-none" />
+
+            <div className="flex flex-col gap-20">
 
                 {/* --- Solution Points --- */}
-                <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
+                <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-4">
                     {SOLUTION_POINTS.map((point) => {
                         const Icon = ICON_MAP[point.icon];
                         return (
-                            <div key={point.label} className="flex flex-col items-center text-center">
-                                <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary">
-                                    {Icon && <Icon size={28} />}
+                            <div key={point.label} className="group flex flex-col items-center text-center">
+                                <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-all duration-500 group-hover:bg-primary group-hover:text-white group-hover:shadow-xl group-hover:shadow-primary/30 group-hover:-translate-y-2 group-hover:rotate-3">
+                                    {Icon && <Icon size={30} strokeWidth={1.5} />}
                                 </div>
-                                <h3 className="mb-2 text-lg font-bold text-foreground">{point.label}</h3>
-                                <p className="text-sm text-muted-foreground">{point.description}</p>
+                                <h3 className="mb-2 text-xl font-bold text-foreground transition-colors group-hover:text-primary leading-tight px-2">{point.label}</h3>
+                                <p className="text-sm leading-relaxed text-muted-foreground">{point.description}</p>
                             </div>
                         );
                     })}
                 </div>
 
                 {/* --- How It Works --- */}
-                <div className="rounded-3xl bg-primary/5 px-6 py-12 sm:px-12 sm:py-16">
-                    <div className="mx-auto mb-12 max-w-2xl text-center">
-                        <h2 className="text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-                            How it works
+                <div className="relative rounded-[3rem] bg-linear-to-b from-primary/5 to-transparent border border-primary/10 px-8 py-16 sm:px-16 sm:py-24 overflow-hidden shadow-2xl shadow-primary/5">
+                    {/* Glowing highlight */}
+                    <div className="absolute left-1/2 top-0 h-px w-3/4 -translate-y-1/2 bg-linear-to-r from-transparent via-primary/50 to-transparent" />
+
+                    <div className="relative z-10 mx-auto mb-16 max-w-2xl text-center">
+                        <span className="text-xs font-bold uppercase tracking-widest text-primary mb-3 block">Simple Process</span>
+                        <h2 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">
+                            How it <span className="text-primary italic">works</span>
                         </h2>
-                        <p className="mt-4 text-base text-muted-foreground">
-                            Getting your home services sorted is as easy as 1-2-3.
-                        </p>
                     </div>
 
-                    <div className="relative grid grid-cols-1 gap-12 md:grid-cols-3 md:gap-8">
+                    <div className="relative z-10 grid grid-cols-1 gap-14 md:grid-cols-3 md:gap-12">
                         {/* Connecting line for desktop */}
-                        <div className="absolute left-[15%] right-[15%] top-8 hidden h-0.5 border-t-2 border-dashed border-primary/20 md:block" />
+                        <div className="absolute left-[15%] right-[15%] top-12 hidden h-0.5 border-t-2 border-dashed border-primary/30 md:block" />
 
                         {HOW_IT_WORKS.map((step, index) => {
                             const Icon = ICON_MAP[step.icon];
                             return (
-                                <div key={step.title} className="relative flex flex-col items-center text-center">
-                                    <div className="relative mb-5 flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-background border border-primary/20 text-primary shadow-sm z-10">
-                                        {Icon && <Icon size={24} />}
-                                        <div className="absolute -bottom-2 -right-2 flex h-7 w-7 items-center justify-center rounded-full bg-primary text-xs font-bold text-primary-foreground border-2 border-background">
+                                <div key={step.title} className="group relative flex flex-col items-center text-center">
+                                    <div className="relative mb-8 flex h-24 w-24 shrink-0 items-center justify-center rounded-[2rem] bg-background border-2 border-primary/20 text-primary shadow-xl z-20 transition-all duration-500 group-hover:border-primary group-hover:scale-105 group-hover:shadow-primary/10">
+                                        {Icon && <Icon size={40} strokeWidth={1} />}
+                                        <div className="absolute -top-3 -right-3 flex h-10 w-10 items-center justify-center rounded-2xl bg-primary text-base font-black text-white shadow-lg border-2 border-background">
                                             {index + 1}
                                         </div>
                                     </div>
-                                    <h3 className="mb-2 text-xl font-bold text-foreground">{step.title}</h3>
-                                    <p className="text-sm text-muted-foreground">{step.description}</p>
+                                    <h3 className="mb-3 text-2xl font-bold text-foreground tracking-tight">{step.title}</h3>
+                                    <p className="text-sm text-muted-foreground leading-relaxed px-4">{step.description}</p>
                                 </div>
                             );
                         })}
@@ -71,12 +75,12 @@ export function Solution() {
                     {SOCIAL_PROOF.map((proof) => {
                         const Icon = ICON_MAP[proof.icon];
                         return (
-                            <Card key={proof.label} className="flex items-center gap-5 p-6 shadow-sm transition-shadow hover:shadow-md">
-                                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-green-50 text-green-600">
-                                    {Icon && <Icon size={26} className={proof.icon === 'Star' ? 'fill-current' : ''} />}
+                            <Card key={proof.label} className="group flex items-center gap-6 p-8 border-border/50 bg-background transition-all duration-300 hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] hover:-translate-y-1 rounded-[2rem]">
+                                <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-3xl bg-primary text-white shadow-lg shadow-primary/30 transition-all duration-500 group-hover:rotate-6">
+                                    {Icon && <Icon size={28} className={proof.icon === 'Star' ? 'fill-current' : ''} />}
                                 </div>
-                                <div className="text-left">
-                                    <div className="text-2xl font-black text-foreground">{proof.stat}</div>
+                                <div className="flex flex-col">
+                                    <div className="text-3xl font-extrabold text-foreground tracking-tighter">{proof.stat}</div>
                                     <div className="text-sm font-medium text-muted-foreground">{proof.label}</div>
                                 </div>
                             </Card>

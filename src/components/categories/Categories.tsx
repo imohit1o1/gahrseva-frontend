@@ -1,66 +1,58 @@
-import {
-    Sparkles, Droplets, Zap, Hammer,
-    PaintBucket, Bug, Sprout, WashingMachine,
-    ArrowRight, type LucideIcon,
-} from 'lucide-react';
-import { Card } from '../ui/card';
+import { ArrowRight } from 'lucide-react';
 import { CATEGORIES } from '../../constants';
 
-const ICON_MAP: Record<string, LucideIcon> = {
-    Sparkles, Droplets, Zap, Hammer,
-    PaintBucket, Bug, Sprout, WashingMachine,
-};
-
+// We map labels to a cleaner import if needed, but since we use public-relative src paths in CATEGORIES, 
+// and they are in src/assets, we can just use those strings or use new URL for robustness in Vite
 export function Categories() {
     return (
-        <section className="py-14 sm:py-16">
+        <section className="py-8 sm:py-12">
 
             {/* Body container */}
-            <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-10">
 
-                {/* 1st container — heading only */}
+                {/* Heading container */}
                 <div className="text-center">
-                    <h2 className="text-2xl font-bold text-foreground sm:text-3xl">
+                    <h2 className="text-2xl font-extrabold tracking-tight text-foreground sm:text-4xl">
                         Browse by Category
                     </h2>
-                    <p className="mt-1 text-sm text-muted-foreground">
+                    <p className="mt-2 text-sm text-muted-foreground sm:text-base">
                         Pick the service you need and we'll handle the rest
                     </p>
                 </div>
 
-                {/* 2nd container — see all + cards */}
-                <div className="flex flex-col gap-4">
-
-                    {/* See all */}
-                    <div className="flex justify-end">
+                <div className="flex flex-col gap-6">
+                    {/* See all — pushed to the right */}
+                    <div className="flex justify-end pr-2">
                         <a
                             href="#"
-                            className="flex items-center gap-1 text-sm font-medium text-primary transition-opacity hover:opacity-70"
+                            className="flex items-center gap-1.5 text-sm font-semibold text-primary transition-all hover:gap-2"
                         >
                             See all
-                            <ArrowRight size={14} />
+                            <ArrowRight size={16} />
                         </a>
                     </div>
 
-                    {/* Category cards */}
-                    <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-                        {CATEGORIES.map((category) => {
-                            const Icon = ICON_MAP[category.icon];
-                            return (
-                                <a key={category.label} href={category.href} className="group block">
-                                    <Card className="gap-0 py-0 transition-shadow hover:shadow-md">
-                                        <div className="flex flex-col items-center gap-3 p-6 text-center">
-                                            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
-                                                {Icon && <Icon size={22} />}
-                                            </div>
-                                            <span className="text-sm font-medium text-foreground">
-                                                {category.label}
-                                            </span>
-                                        </div>
-                                    </Card>
-                                </a>
-                            );
-                        })}
+                    {/* Categories grid */}
+                    <div className="grid grid-cols-2 gap-x-6 gap-y-12 sm:grid-cols-4 px-4 sm:px-0">
+                        {CATEGORIES.map((category) => (
+                            <a
+                                key={category.label}
+                                href={category.href}
+                                className="group flex flex-col items-center text-center transition-transform duration-300 hover:-translate-y-2"
+                            >
+                                {/* Transparent Image Wrapper */}
+                                <div className="relative mb-4 aspect-square w-full max-w-[140px] overflow-visible">
+                                    <img
+                                        src={category.image}
+                                        alt={category.label}
+                                        className="h-full w-full object-contain mix-blend-multiply filter drop-shadow-sm transition-all duration-500 group-hover:scale-110 group-hover:drop-shadow-xl"
+                                    />
+                                </div>
+                                <span className="text-sm font-bold text-foreground group-hover:text-primary transition-colors duration-300">
+                                    {category.label}
+                                </span>
+                            </a>
+                        ))}
                     </div>
                 </div>
             </div>

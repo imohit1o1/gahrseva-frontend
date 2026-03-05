@@ -10,14 +10,14 @@ export const NAV_LINKS = [
 export const SERVICE_TAGS = ['Electricians', 'Plumbers', 'Cleaning', 'Appliance Repair'];
 
 export const CATEGORIES = [
-    { label: 'Home Cleaning', icon: 'Sparkles', href: '#' },
-    { label: 'Plumbing', icon: 'Droplets', href: '#' },
-    { label: 'Electrical', icon: 'Zap', href: '#' },
-    { label: 'Carpentry', icon: 'Hammer', href: '#' },
-    { label: 'Painting', icon: 'PaintBucket', href: '#' },
-    { label: 'Appliance Repair', icon: 'WashingMachine', href: '#' },
-    { label: 'Pest Control', icon: 'Bug', href: '#' },
-    { label: 'Gardening', icon: 'Sprout', href: '#' },
+    { label: 'Home Cleaning', image: '/src/assets/cat_cleaning.png', href: '#' },
+    { label: 'Plumbing', image: '/src/assets/cat_plumbing.png', href: '#' },
+    { label: 'Electrical', image: '/src/assets/cat_electrical.png', href: '#' },
+    { label: 'Carpentry', image: '/src/assets/cat_carpentry.png', href: '#' },
+    { label: 'Painting', image: '/src/assets/cat_painting.png', href: '#' },
+    { label: 'Appliance Repair', image: '/src/assets/cat_appliance.png', href: '#' },
+    { label: 'Pest Control', image: '/src/assets/cat_pest_control.png', href: '#' },
+    { label: 'Gardening', image: '/src/assets/cat_gardening.png', href: '#' },
 ];
 
 export const PROBLEM_POINTS = [

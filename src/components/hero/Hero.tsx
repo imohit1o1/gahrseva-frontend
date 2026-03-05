@@ -11,16 +11,14 @@ import {
 import { SERVICES_MENU, SERVICE_TAGS, TRUST_BADGES } from '../../constants';
 import { LeftIllustration } from './LeftIllustration';
 import { RightIllustration } from './RightIllustration';
-import { BackgroundBlobs } from './BackgroundBlobs';
 
 export function Hero() {
     const [service, setService] = useState('');
     const [location, setLocation] = useState('');
 
     return (
-        <section className="relative flex min-h-[calc(100vh-12rem)] flex-col justify-center overflow- text-center">
+        <section className="relative flex min-h-[calc(100vh-16rem)] flex-col justify-center text-center">
 
-            <BackgroundBlobs />
             <LeftIllustration />
             <RightIllustration />
 
