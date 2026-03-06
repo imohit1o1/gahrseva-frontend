@@ -8,7 +8,7 @@ interface SectionLayoutProps {
 export function SectionLayout({ children, className = '' }: SectionLayoutProps) {
     return (
         // Main Container
-        <section className={`flex flex-col gap-10 py-8 sm:py-12 ${className}`}>
+        <section className={`flex flex-col gap-10 py-8 sm:py-12 bordr border-red-500 ${className}`}>
             {children}
         </section>
     );

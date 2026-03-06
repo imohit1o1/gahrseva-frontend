@@ -6,12 +6,12 @@ export function LeftIllustration() {
             <img
                 src={HERO.left_blob}
                 alt=""
-                className="absolute left-[-22%] top-[42%] h-[80%] w-full -translate-y-1/2 object-contain z-[-1]"
+                className="absolute left-[-38%] top-[48%] h-[80%] w-full -translate-y-1/2 object-contain z-[-1]"
             />
             <img
                 src={HERO.left_illustration}
                 alt="Cleaning Services"
-                className="absolute left-[-20%] top-[42%] h-[65%] w-full -translate-y-1/2 object-contain"
+                className="absolute left-[-35%] top-[48%] h-[65%] w-full -translate-y-1/2 object-contain"
             />
         </div>
     );
