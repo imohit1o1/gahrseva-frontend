@@ -1,13 +1,13 @@
 import { Search, Filter, ArrowLeft } from 'lucide-react';
-import { MOCK_PROVIDERS, CATEGORIES } from '../../constants';
+import { MOCK_SERVICE_PROVIDERS, CATEGORIES } from '../../constants';
 import { useState } from 'react';
-import { ProviderCard } from './ProviderCard';
+import { ServiceProviderCard } from './ServiceProviderCard';
 
 export function ServiceProviders() {
     const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
     const [searchQuery, setSearchQuery] = useState('');
 
-    const filteredProviders = MOCK_PROVIDERS.filter(provider => {
+    const filteredServiceProviders = MOCK_SERVICE_PROVIDERS.filter(provider => {
         const matchesCategory = !selectedCategory || provider.category === selectedCategory;
         const matchesSearch = provider.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
             provider.category.toLowerCase().includes(searchQuery.toLowerCase());
@@ -78,10 +78,10 @@ export function ServiceProviders() {
                 </div>
 
                 {/* Providers Grid */}
-                {filteredProviders.length > 0 ? (
+                {filteredServiceProviders.length > 0 ? (
                     <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                        {filteredProviders.map((provider) => (
-                            <ProviderCard key={provider.id} provider={provider} />
+                        {filteredServiceProviders.map((provider) => (
+                            <ServiceProviderCard key={provider.id} provider={provider} />
                         ))}
                     </div>
                 ) : (
@@ -89,7 +89,7 @@ export function ServiceProviders() {
                         <div className="mb-4 rounded-full bg-slate-100 p-6">
                             <Search size={40} className="text-slate-400" />
                         </div>
-                        <h3 className="text-xl font-bold text-slate-900">No providers found</h3>
+                        <h3 className="text-xl font-bold text-slate-900">No service providers found</h3>
                         <p className="mt-2 text-slate-500">Try adjusting your filters or search terms.</p>
                         <button
                             onClick={() => { setSelectedCategory(null); setSearchQuery(''); }}

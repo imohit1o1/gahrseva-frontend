@@ -1,14 +1,14 @@
-import { ProviderCard } from '../../providers/ProviderCard';
-import { MOCK_PROVIDERS } from '../../../constants';
+import { ServiceProviderCard } from '../../providers/ServiceProviderCard';
+import { MOCK_SERVICE_PROVIDERS } from '../../../constants';
 import { Link } from '@tanstack/react-router';
 import { ArrowRight } from 'lucide-react';
 import { SectionLayout } from '../section-layout/SectionLayout';
 
-export function FeaturedProviders() {
-    // Pick top 4 featured providers
-    const featuredProviders = MOCK_PROVIDERS.filter(p => p.is_featured).slice(0, 4);
+export function FeaturedServiceProviders() {
+    // Pick top 4 featured service providers
+    const featuredServiceProviders = MOCK_SERVICE_PROVIDERS.filter(p => p.is_featured).slice(0, 4);
 
-    if (featuredProviders.length === 0) return null;
+    if (featuredServiceProviders.length === 0) return null;
 
     return (
         <SectionLayout>
@@ -16,7 +16,7 @@ export function FeaturedProviders() {
             <div className="text-center mb-12">
                 <span className="text-xs font-bold uppercase tracking-widest text-primary mb-3 block">Experts</span>
                 <h2 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">
-                    Featured <span className="text-primary">Providers</span>
+                    Featured <span className="text-primary">Service Providers</span>
                 </h2>
                 <p className="mt-4 text-sm sm:text-base text-muted-foreground mx-auto max-w-2xl">
                     Top-rated experts ready to serve you today
@@ -28,18 +28,18 @@ export function FeaturedProviders() {
                 {/* Link Button  */}
                 <div className="flex justify-end">
                     <Link
-                        to="/providers"
+                        to="/service-providers"
                         className="flex items-center gap-1.5 text-sm font-semibold text-primary transition-all hover:gap-2"
                     >
-                        View all providers
+                        View all service providers
                         <ArrowRight size={16} />
                     </Link>
                 </div>
 
-                {/* Providers grid */}
+                {/* Service Providers grid */}
                 <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                    {featuredProviders.map(provider => (
-                        <ProviderCard key={provider.id} provider={provider} />
+                    {featuredServiceProviders.map(provider => (
+                        <ServiceProviderCard key={provider.id} provider={provider} />
                     ))}
                 </div>
             </div>

@@ -1,7 +1,8 @@
 import { createRootRoute, createRoute } from "@tanstack/react-router";
 import { RootLayout } from "./RootLayout";
 import Home from "../pages/Home";
-import Providers from "../pages/Providers";
+import ServiceProviders from "../pages/ServiceProviders";
+import ServiceProviderRegister from "../pages/ServiceProviderRegister";
 
 const rootRoute = createRootRoute({
     component: RootLayout,
@@ -15,7 +16,12 @@ export const routeTree = rootRoute.addChildren([
     }),
     createRoute({
         getParentRoute: () => rootRoute,
-        path: "/providers",
-        component: Providers,
+        path: "/register/service-provider",
+        component: ServiceProviderRegister,
+    }),
+    createRoute({
+        getParentRoute: () => rootRoute,
+        path: "/service-providers",
+        component: ServiceProviders,
     }),
 ]);

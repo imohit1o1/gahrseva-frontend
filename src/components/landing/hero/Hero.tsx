@@ -8,7 +8,7 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from '../../ui/dropdown-menu';
-import { SERVICES_MENU, SERVICE_TAGS, TRUST_BADGES } from '../../../constants';
+import { CATEGORIES_LIST, SERVICE_TAGS, TRUST_BADGES } from '../../../constants';
 import { LeftIllustration } from './LeftIllustration';
 import { RightIllustration } from './RightIllustration';
 
@@ -56,7 +56,7 @@ export function Hero() {
                             </button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent className="w-56">
-                            {SERVICES_MENU.map((s) => (
+                            {CATEGORIES_LIST.map((s) => (
                                 <DropdownMenuItem
                                     key={s.label}
                                     onClick={() => setService(s.label)}

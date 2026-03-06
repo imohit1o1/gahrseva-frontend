@@ -2,6 +2,7 @@ import { Button } from "../../ui/button";
 import { Link } from "@tanstack/react-router";
 import { SectionLayout } from "../section-layout/SectionLayout";
 import { CheckCircle2 } from "lucide-react";
+import { CTA } from "../../../constants";
 
 export function FinalCTA() {
     return (
@@ -27,14 +28,14 @@ export function FinalCTA() {
                         size="lg"
                         className="w-full sm:w-auto border-slate-200 text-slate-900 hover:bg-slate-50 rounded-2xl font-black py-8 px-10 text-lg shadow-sm"
                     >
-                        <Link to="/providers">Browse Services</Link>
+                        <Link to={CTA[1].href}>{CTA[1].label}</Link>
                     </Button>
                     <Button
                         asChild
                         size="lg"
                         className="w-full sm:w-auto bg-primary text-white hover:bg-primary/90 rounded-2xl font-black py-7 px-10 text-lg shadow-xl shadow-primary/20 transition-all hover:-translate-y-1"
                     >
-                        <Link to="/">Become a Provider</Link>
+                        <Link to={CTA[0].href}>{CTA[0].label}</Link>
                     </Button>
                 </div>
 

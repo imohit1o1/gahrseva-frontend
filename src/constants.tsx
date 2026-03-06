@@ -1,4 +1,4 @@
-import { Twitter, Instagram, Facebook } from 'lucide-react';
+import { Twitter, Instagram, Facebook, LayoutDashboard, LogOut } from 'lucide-react';
 
 export const LOGO = {
     icon: '/src/assets/logo/gharseva-logo.webp',
@@ -13,24 +13,45 @@ export const HERO = {
     right_blob: '/src/assets/hero/right_illustrations/right_blob.webp',
 }
 
+export const CATEGORIES_LIST = [
+    { label: 'Home Cleaning' },
+    { label: 'Plumbing' },
+    { label: 'Electrical' },
+    { label: 'Carpentry' },
+    { label: 'Painting' },
+    { label: 'Appliance Repair' },
+    { label: 'Pest Control' },
+    { label: 'Gardening' },
+];
+
 export const NAV_LINKS = [
     { label: 'Home', href: '/' },
-    { label: 'Services', href: '/providers' },
-    { label: 'About', href: '#about' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Categories', href: '/service-categories' },
+    { label: 'About', href: '/about' },
+    { label: 'Contact', href: '/contact' },
+];
+export const CTA = [
+    { label: 'Become a Service Provider', href: '/register/service-provider' },
+    { label: 'Browse Services', href: '/service-providers' },
+    { label: 'Dashboard', href: '/dashboard' }
+];
+
+export const PROFILE_DROPDOWN = [
+    { label: 'Dashboard', href: '/dashboard', icon: <LayoutDashboard size={14} /> },
+    { label: 'Logout', href: '/', icon: <LogOut size={14} />, variant: 'destructive' }
 ];
 
 export const SERVICE_TAGS = ['Electricians', 'Plumbers', 'Cleaning', 'Appliance Repair'];
 
 export const CATEGORIES = [
-    { label: 'Home Cleaning', image: '/src/assets/categories/cat_cleaning.webp', href: '/providers' },
-    { label: 'Plumbing', image: '/src/assets/categories/cat_plumbing.webp', href: '/providers' },
-    { label: 'Electrical', image: '/src/assets/categories/cat_electrical.webp', href: '/providers' },
-    { label: 'Carpentry', image: '/src/assets/categories/cat_carpentry.webp', href: '/providers' },
-    { label: 'Painting', image: '/src/assets/categories/cat_painting.webp', href: '/providers' },
-    { label: 'Appliance Repair', image: '/src/assets/categories/cat_appliance.webp', href: '/providers' },
-    { label: 'Pest Control', image: '/src/assets/categories/cat_pest_control.webp', href: '/providers' },
-    { label: 'Gardening', image: '/src/assets/categories/cat_gardening.webp', href: '/providers' },
+    { label: 'Home Cleaning', image: '/src/assets/categories/cat_cleaning.webp', href: '/service-providers' },
+    { label: 'Plumbing', image: '/src/assets/categories/cat_plumbing.webp', href: '/service-providers' },
+    { label: 'Electrical', image: '/src/assets/categories/cat_electrical.webp', href: '/service-providers' },
+    { label: 'Carpentry', image: '/src/assets/categories/cat_carpentry.webp', href: '/service-providers' },
+    { label: 'Painting', image: '/src/assets/categories/cat_painting.webp', href: '/service-providers' },
+    { label: 'Appliance Repair', image: '/src/assets/categories/cat_appliance.webp', href: '/service-providers' },
+    { label: 'Pest Control', image: '/src/assets/categories/cat_pest_control.webp', href: '/service-providers' },
+    { label: 'Gardening', image: '/src/assets/categories/cat_gardening.webp', href: '/service-providers' },
 ];
 
 export const PROBLEM_POINTS = [
@@ -64,13 +85,30 @@ export const TRUST_BADGES = [
     { label: 'Same Day Service' },
 ];
 
-export const SERVICES_MENU = [
-    { label: 'Home Cleaning', href: '#', description: 'Deep & regular cleaning for every room' },
-    { label: 'Plumbing', href: '#', description: 'Leak fixes, pipe work & installations' },
-    { label: 'Electrical', href: '#', description: 'Wiring, fittings & safety checks' },
-    { label: 'Carpentry', href: '#', description: 'Furniture repair, assembly & custom builds' },
-    { label: 'Painting', href: '#', description: 'Interior & exterior painting services' },
-    { label: 'Appliance Repair', href: '#', description: 'AC, washing machine, fridge & more' },
+export const CATEGORIES_MENU = [
+    {
+        title: 'Home Maintenance',
+        items: [
+            { label: 'Plumbing', href: '/service-providers?category=Plumbing', description: 'Fix leaks, taps, and pipes' },
+            { label: 'Electrical', href: '/service-providers?category=Electrical', description: 'Wiring, shocks, and installations' },
+            { label: 'Carpentry', href: '/service-providers?category=Carpentry', description: 'Furniture repair and assembly' },
+        ]
+    },
+    {
+        title: 'Cleaning & Pest',
+        items: [
+            { label: 'Home Cleaning', href: '/service-providers?category=Home+Cleaning', description: 'Deep and regular house cleaning' },
+            { label: 'Pest Control', href: '/service-providers?category=Pest+Control', description: 'Termite and bug treatments' },
+            { label: 'Gardening', href: '/service-providers?category=Gardening', description: 'Lawn care and maintenance' },
+        ]
+    },
+    {
+        title: 'Appliance & Others',
+        items: [
+            { label: 'Appliance Repair', href: '/service-providers?category=Appliance+Repair', description: 'AC, Fridge, Washing Machine' },
+            { label: 'Painting', href: '/service-providers?category=Painting', description: 'Interior and exterior painting' },
+        ]
+    }
 ];
 
 
@@ -86,7 +124,7 @@ export const SOCIAL_LINKS = [
     { label: 'Facebook', href: '#', icon: <Facebook size={18} /> },
 ];
 
-export const MOCK_PROVIDERS = [
+export const MOCK_SERVICE_PROVIDERS = [
     {
         id: '1',
         name: 'John Doe',

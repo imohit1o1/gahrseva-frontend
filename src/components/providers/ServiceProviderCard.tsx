@@ -14,11 +14,11 @@ const CATEGORY_COLORS: Record<string, string> = {
     'Gardening': 'bg-lime-50 text-lime-600 border-lime-100',
 };
 
-export function ProviderCard({ provider }: { provider: any }) {
+export function ServiceProviderCard({ provider }: { provider: any }) {
     return (
         <Card className="group relative overflow-hidden rounded-2xl bg-white border border-slate-200 transition-all hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:border-primary/30 p-5 flex flex-col gap-4">
 
-            {/* Header: Avatar & provider Info */}
+            {/* Header: Avatar & Service Provider Info */}
             <div className="flex items-center gap-2">
                 <div className="relative shrink-0">
                     <img
