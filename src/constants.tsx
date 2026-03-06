@@ -18,7 +18,6 @@ export const NAV_LINKS = [
     { label: 'Services', href: '/providers' },
     { label: 'About', href: '#about' },
     { label: 'Contact', href: '#contact' },
-    { label: 'Become a Provider', href: '#providers' },
 ];
 
 export const SERVICE_TAGS = ['Electricians', 'Plumbers', 'Cleaning', 'Appliance Repair'];

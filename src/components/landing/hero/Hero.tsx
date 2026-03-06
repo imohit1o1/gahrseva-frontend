@@ -26,7 +26,7 @@ export function Hero() {
             <div className="relative z-10 mx-auto flex w-full max-w-3xl flex-col items-center px-4">
 
                 {/* Pill */}
-                <div className="mb-4 sm:mb-5 inline-flex self-center items-center gap-1.5 sm:gap-2 rounded-full border border-primary/30 bg-primary/5 px-3 py-1 sm:px-4 sm:py-1.5 text-xs sm:text-sm font-medium text-primary">
+                <div className="mb-4 sm:mb-5 inline-flex self-center items-center gap-1.5 sm:gap-2 rounded-full border border-dashed border-primary/30 bg-primary/5 px-3 py-1 sm:px-4 sm:py-1.5 text-xs sm:text-sm font-medium text-primary">
                     <CheckCircle2 size={14} className="h-3.5 w-3.5 sm:h-4 sm:w-4" />
                     Trusted by 10,000+ homeowners across India
                 </div>
