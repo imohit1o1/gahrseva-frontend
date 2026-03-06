@@ -7,11 +7,12 @@ export function Categories() {
     return (
         <SectionLayout>
             {/* Heading container */}
-            <div className="text-center">
-                <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-foreground">
-                    Browse by Category
+            <div className="text-center mb-12">
+                <span className="text-xs font-bold uppercase tracking-widest text-primary mb-3 block">Explore</span>
+                <h2 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">
+                    Browse by <span className="text-primary">Category</span>
                 </h2>
-                <p className="mt-2 text-sm sm:text-base text-muted-foreground">
+                <p className="mt-4 text-sm sm:text-base text-muted-foreground mx-auto max-w-2xl">
                     Pick the service you need and we'll handle the rest
                 </p>
             </div>

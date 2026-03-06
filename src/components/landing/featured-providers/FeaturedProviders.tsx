@@ -13,11 +13,12 @@ export function FeaturedProviders() {
     return (
         <SectionLayout>
             {/* Header Container */}
-            <div className="text-center">
-                <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight text-foreground">
-                    Featured Providers
+            <div className="text-center mb-12">
+                <span className="text-xs font-bold uppercase tracking-widest text-primary mb-3 block">Experts</span>
+                <h2 className="text-4xl font-extrabold tracking-tight text-foreground sm:text-5xl">
+                    Featured <span className="text-primary">Providers</span>
                 </h2>
-                <p className="mt-2 text-sm sm:text-base text-muted-foreground">
+                <p className="mt-4 text-sm sm:text-base text-muted-foreground mx-auto max-w-2xl">
                     Top-rated experts ready to serve you today
                 </p>
             </div>
@@ -36,7 +37,7 @@ export function FeaturedProviders() {
                 </div>
 
                 {/* Providers grid */}
-                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+                <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                     {featuredProviders.map(provider => (
                         <ProviderCard key={provider.id} provider={provider} />
                     ))}

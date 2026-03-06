@@ -17,7 +17,7 @@ export function Hero() {
     const [location, setLocation] = useState('');
 
     return (
-        <section className="relative flex min-h-[calc(100vh-6rem)] flex-col justify-center text-center">
+        <section className="relative flex min-h-[calc(100vh-8rem)] flex-col justify-center text-center">
 
             <LeftIllustration />
             <RightIllustration />
