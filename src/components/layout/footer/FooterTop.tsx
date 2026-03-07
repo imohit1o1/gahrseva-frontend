@@ -1,7 +1,15 @@
 import { Link } from '@tanstack/react-router';
 import { FOOTER_LINKS, SOCIAL_LINKS, LOGO } from '../../../constants';
+import { useCategories } from '../../../hooks/useCategories';
 
 export function FooterTop() {
+    const { categories } = useCategories();
+
+    // Replace static services with API categories
+    const footerLinks = {
+        ...FOOTER_LINKS,
+        Services: categories?.slice(0, 4).map(c => c.name) || FOOTER_LINKS.Services
+    };
     return (
         <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-5">
             {/* Brand column */}
@@ -28,18 +36,18 @@ export function FooterTop() {
             </div>
 
             {/* Link columns */}
-            {Object.entries(FOOTER_LINKS).map(([category, links]) => (
+            {Object.entries(footerLinks).map(([category, links]) => (
                 <div key={category}>
                     <h3 className="mb-4 text-sm font-semibold text-foreground">{category}</h3>
                     <ul className="space-y-2.5">
                         {links.map((link) => (
                             <li key={link}>
-                                <a
-                                    href="#"
+                                <Link
+                                    to="/"
                                     className="text-sm text-muted-foreground transition-colors hover:text-primary"
                                 >
                                     {link}
-                                </a>
+                                </Link>
                             </li>
                         ))}
                     </ul>

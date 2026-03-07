@@ -1,3 +1,5 @@
+import { CATEGORIES } from "@/constants";
+
 export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL as string;
 
 const API_PREFIX = '/api/v1';
@@ -19,6 +21,11 @@ export const ENDPOINTS = {
   },
   SERVICE_PROVIDER: {
     ANALYTICS: `${API_PREFIX}/service-provider/analytics`
+  },
+  CATEGORIES: {
+    BASE: `${API_PREFIX}/service-categories`,
+    BY_SLUG: (slug: string) => `${API_PREFIX}/service-categories/slug/${slug}`,
+    BY_ID: (id: string) => `${API_PREFIX}/service-categories/${id}`,
   },
   ADMIN: {
     ANALYTICS: {

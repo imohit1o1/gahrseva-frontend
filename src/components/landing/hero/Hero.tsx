@@ -8,11 +8,13 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from '../../ui/dropdown-menu';
-import { CATEGORIES_LIST, SERVICE_TAGS, TRUST_BADGES } from '../../../constants';
+import { SERVICE_TAGS, TRUST_BADGES } from '../../../constants';
+import { useCategories } from '../../../hooks/useCategories';
 import { LeftIllustration } from './LeftIllustration';
 import { RightIllustration } from './RightIllustration';
 
 export function Hero() {
+    const { categories } = useCategories();
     const [service, setService] = useState('');
     const [location, setLocation] = useState('');
 
@@ -56,12 +58,12 @@ export function Hero() {
                             </button>
                         </DropdownMenuTrigger>
                         <DropdownMenuContent className="w-56">
-                            {CATEGORIES_LIST.map((s) => (
+                            {categories?.map((s) => (
                                 <DropdownMenuItem
-                                    key={s.label}
-                                    onClick={() => setService(s.label)}
+                                    key={s._id}
+                                    onClick={() => setService(s.name)}
                                 >
-                                    {s.label}
+                                    {s.name}
                                 </DropdownMenuItem>
                             ))}
                         </DropdownMenuContent>

@@ -20,23 +20,12 @@ import {
     FieldLabel,
 } from "@/components/ui/field"
 import { useAuth } from "@/hooks/useAuth"
+import { useCategories } from "@/hooks/useCategories"
 import { serviceProviderRegisterSchema, type ServiceProviderRegisterValues } from "@/schemas/auth"
-
-
-// Mock categories for the select input
-const MOCK_CATEGORIES = [
-    { id: "65b4f8e91234567890abcdef", name: "Home Cleaning" },
-    { id: "65b4f8e91234567890abcde1", name: "Plumbing" },
-    { id: "65b4f8e91234567890abcde2", name: "Electrical" },
-    { id: "65b4f8e91234567890abcde3", name: "Carpentry" },
-    { id: "65b4f8e91234567890abcde4", name: "Painting" },
-    { id: "65b4f8e91234567890abcde5", name: "Appliance Repair" },
-    { id: "65b4f8e91234567890abcde6", name: "Pest Control" },
-    { id: "65b4f8e91234567890abcde7", name: "Gardening" },
-]
 
 export function ServiceProviderRegisterForm() {
     const { registerServiceProvider, isLoading, error } = useAuth()
+    const { categories, isLoading: isCategoriesLoading } = useCategories()
     const { uploadImage, isUploading, uploadError } = useUpload()
 
     const form = useForm<ServiceProviderRegisterValues>({
@@ -203,16 +192,23 @@ export function ServiceProviderRegisterForm() {
                         <Field orientation="vertical">
                             <FieldLabel required>Service Category</FieldLabel>
                             <FieldContent>
-                                <Select onValueChange={(value) => form.setValue("category_id", value)}>
+                                <Select onValueChange={(value) => form.setValue("category_id", value)} disabled={isCategoriesLoading}>
                                     <SelectTrigger className="h-12 rounded-xl border-border/60 bg-background">
                                         <div className="flex items-center gap-3">
                                             <Briefcase className="size-4 text-muted-foreground/40" />
-                                            <SelectValue placeholder="Select category" />
+                                            {isCategoriesLoading ? (
+                                                <div className="flex items-center gap-2">
+                                                    <Loader2 className="size-3 animate-spin" />
+                                                    <span className="text-muted-foreground">Loading categories...</span>
+                                                </div>
+                                            ) : (
+                                                <SelectValue placeholder="Select category" />
+                                            )}
                                         </div>
                                     </SelectTrigger>
                                     <SelectContent className="rounded-xl">
-                                        {MOCK_CATEGORIES.map((cat) => (
-                                            <SelectItem key={cat.id} value={cat.id} className="rounded-lg">
+                                        {categories?.map((cat) => (
+                                            <SelectItem key={cat._id} value={cat._id} className="rounded-lg">
                                                 {cat.name}
                                             </SelectItem>
                                         ))}

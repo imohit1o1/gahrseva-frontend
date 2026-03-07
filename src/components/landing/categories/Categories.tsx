@@ -1,9 +1,11 @@
-import { ArrowRight } from 'lucide-react';
-import { CATEGORIES } from '../../../constants';
+import { ArrowRight, Loader2 } from 'lucide-react';
+import { useCategories } from '../../../hooks/useCategories';
 import { Link } from '@tanstack/react-router';
 import { SectionLayout } from '../section-layout/SectionLayout';
 
 export function Categories() {
+    const { categories, isLoading } = useCategories();
+
     return (
         <SectionLayout>
             {/* Heading container */}
@@ -33,9 +35,13 @@ export function Categories() {
 
                 {/* Categories grid */}
                 <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-6 gap-y-12">
-                    {CATEGORIES.map((category) => (
+                    {isLoading ? (
+                        <div className="col-span-full py-20 flex justify-center">
+                            <Loader2 className="animate-spin text-primary/40" />
+                        </div>
+                    ) : categories?.map((category) => (
                         <Link
-                            key={category.label}
+                            key={category._id}
                             to="/providers"
                             className="group flex flex-col items-center text-center transition-transform duration-300 hover:-translate-y-2"
                         >
@@ -43,12 +49,12 @@ export function Categories() {
                             <div className="relative mb-4 aspect-square w-full max-w-[140px]">
                                 <img
                                     src={category.image}
-                                    alt={category.label}
+                                    alt={category.name}
                                     className="h-full w-full object-contain mix-blend-multiply filter drop-shadow-sm transition-all duration-500 group-hover:scale-110 group-hover:drop-shadow-xl"
                                 />
                             </div>
                             <span className="text-sm font-bold text-foreground group-hover:text-primary transition-colors duration-300">
-                                {category.label}
+                                {category.name}
                             </span>
                         </Link>
                     ))}
