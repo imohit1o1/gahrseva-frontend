@@ -1,27 +1,102 @@
-import { createRootRoute, createRoute } from "@tanstack/react-router";
+import { createRootRoute, createRoute, redirect } from "@tanstack/react-router";
 import { RootLayout } from "./RootLayout";
 import Home from "../pages/Home";
 import ServiceProviders from "../pages/ServiceProviders";
 import ServiceProviderRegister from "../pages/ServiceProviderRegister";
+import { AdminLayout, adminBeforeLoad } from "../pages/admin/AdminLayout";
+import AdminDashboard from "../pages/admin/AdminDashboard";
+import AdminUsers from "../pages/admin/AdminUsers";
+import AdminProviders from "../pages/admin/AdminProviders";
+import AdminCategories from "../pages/admin/AdminCategories";
+import AdminBookings from "../pages/admin/AdminBookings";
+import AdminReviews from "../pages/admin/AdminReviews";
+import { useAuthStore } from "../store/authStore";
+
+import { PublicLayout } from "./PublicLayout";
 
 const rootRoute = createRootRoute({
     component: RootLayout,
 });
 
+const publicRoute = createRoute({
+    getParentRoute: () => rootRoute,
+    id: 'public',
+    component: PublicLayout,
+});
+
+const dashboardRoute = createRoute({
+    getParentRoute: () => rootRoute,
+    path: "/dashboard",
+    beforeLoad: async () => {
+        const auth = useAuthStore.getState();
+        if (!auth.isAuthenticated) {
+            throw redirect({ to: '/' });
+        }
+        if (auth.user?.role === 'admin') {
+            throw redirect({ to: '/admin/dashboard' });
+        }
+        // Fallback for now
+        throw redirect({ to: '/' });
+    }
+});
+
+const adminRoute = createRoute({
+    getParentRoute: () => rootRoute,
+    path: "/admin",
+    component: AdminLayout,
+    beforeLoad: adminBeforeLoad,
+});
+
 export const routeTree = rootRoute.addChildren([
-    createRoute({
-        getParentRoute: () => rootRoute,
-        path: "/",
-        component: Home,
-    }),
-    createRoute({
-        getParentRoute: () => rootRoute,
-        path: "/register/service-provider",
-        component: ServiceProviderRegister,
-    }),
-    createRoute({
-        getParentRoute: () => rootRoute,
-        path: "/service-providers",
-        component: ServiceProviders,
-    }),
+    publicRoute.addChildren([
+        createRoute({
+            getParentRoute: () => publicRoute,
+            path: "/",
+            component: Home,
+        }),
+        createRoute({
+            getParentRoute: () => publicRoute,
+            path: "/register/service-provider",
+            component: ServiceProviderRegister,
+        }),
+        createRoute({
+            getParentRoute: () => publicRoute,
+            path: "/service-providers",
+            component: ServiceProviders,
+        }),
+    ]),
+    dashboardRoute,
+    adminRoute.addChildren([
+        createRoute({
+            getParentRoute: () => adminRoute,
+            path: "/dashboard",
+            component: AdminDashboard,
+        }),
+        createRoute({
+            getParentRoute: () => adminRoute,
+            path: "/users",
+            component: AdminUsers,
+        }),
+
+        createRoute({
+            getParentRoute: () => adminRoute,
+            path: "/providers",
+            component: AdminProviders,
+        }),
+        createRoute({
+            getParentRoute: () => adminRoute,
+            path: "/categories",
+            component: AdminCategories,
+        }),
+        createRoute({
+            getParentRoute: () => adminRoute,
+            path: "/bookings",
+            component: AdminBookings,
+        }),
+        createRoute({
+            getParentRoute: () => adminRoute,
+            path: "/reviews",
+            component: AdminReviews,
+        }),
+    ]),
 ]);

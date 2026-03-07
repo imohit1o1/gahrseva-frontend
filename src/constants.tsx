@@ -30,6 +30,15 @@ export const NAV_LINKS = [
     { label: 'About', href: '/about' },
     { label: 'Contact', href: '/contact' },
 ];
+
+export const ADMIN_NAV_LINKS = [
+    { label: 'Dashboard', href: '/admin/dashboard' },
+    { label: 'Categories', href: '/admin/categories' },
+    { label: 'Users', href: '/admin/users' },
+    { label: 'Providers', href: '/admin/providers' },
+    { label: 'Bookings', href: '/admin/bookings' },
+    { label: 'Reviews', href: '/admin/reviews' },
+];
 export const CTA = [
     { label: 'Become a Service Provider', href: '/register/service-provider' },
     { label: 'Browse Services', href: '/service-providers' },

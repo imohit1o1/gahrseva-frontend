@@ -1,10 +1,18 @@
+export type UserRole = 'admin' | 'provider' | 'user';
+
 export interface User {
     _id: string;
     display_name: string;
     email: string;
     avatar: string;
-    isProfileComplete?: boolean;
+    role: UserRole;
+    profileComplete?: boolean;
     profile_id?: string | null;
+    firstName?: string;
+    lastName?: string;
+    city?: string;
+    area?: string;
+    pincode?: string;
     createdAt: string;
     updatedAt: string;
 }
