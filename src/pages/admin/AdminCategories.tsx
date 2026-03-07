@@ -4,7 +4,8 @@ import { Button } from '../../components/ui/button';
 import { Plus } from 'lucide-react';
 import { CategoriesTable } from '../../components/admin/categories/CategoriesTable';
 import { CategoryDialog } from '../../components/admin/categories/CategoryDialog';
-import type { Category, CreateCategoryInput } from '../../types/admin/service';
+import type { Category, CreateCategoryInput } from '../../types/category';
+import { toast } from 'sonner';
 
 export default function AdminCategories() {
     const { categories, isLoading, createCategory, updateCategory, deleteCategory } = useAdminCategories();
@@ -15,12 +16,21 @@ export default function AdminCategories() {
         try {
             if (selectedCategory) {
                 await updateCategory.mutateAsync({ _id: selectedCategory._id, ...data });
+                toast.success('Category Updated', {
+                    description: `Category "${data.name}" has been successfully updated.`
+                });
             } else {
                 await createCategory.mutateAsync(data);
+                toast.success('Category Created', {
+                    description: `New category "${data.name}" is now ready for use.`
+                });
             }
             setIsDialogOpen(false);
             setSelectedCategory(null);
         } catch (err) {
+            toast.error('Operation Failed', {
+                description: 'We encountered an error while saving the category.'
+            });
             console.error('Failed to save category', err);
         }
     };
@@ -35,9 +45,16 @@ export default function AdminCategories() {
         setIsDialogOpen(true);
     };
 
-    const handleDelete = (id: string) => {
-        if (window.confirm('Are you sure you want to delete this category?')) {
-            deleteCategory.mutate(id);
+    const handleDelete = async (id: string) => {
+        try {
+            await deleteCategory.mutateAsync(id);
+            toast.success('Category Deleted', {
+                description: 'The category has been successfully removed from the system.'
+            });
+        } catch (err) {
+            toast.error('Delete Failed', {
+                description: 'An error occurred while trying to delete the category.'
+            });
         }
     };
 

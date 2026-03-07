@@ -1,9 +1,11 @@
 import { useAuthStore } from '../store/authStore';
 import { ENDPOINTS } from '../api/endpoints';
 import { api } from '../api/axios';
+import { useNavigate } from '@tanstack/react-router';
 
 export const useAuth = () => {
     const store = useAuthStore();
+    const navigate = useNavigate();
 
     const login = async (email: string, password: string) => {
         store.setLoading(true);
@@ -101,6 +103,7 @@ export const useAuth = () => {
             localStorage.removeItem('token');
             localStorage.removeItem('refreshToken');
             store.logout();
+            navigate({ to: '/' });
         }
     };
 

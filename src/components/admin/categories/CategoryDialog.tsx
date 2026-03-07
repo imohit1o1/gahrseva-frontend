@@ -17,7 +17,7 @@ import { Label } from "../../ui/label";
 import { Textarea } from "../../ui/textarea";
 import { Checkbox } from "../../ui/checkbox";
 import { Field, FieldLabel, FieldError } from "../../ui/field";
-import type { Category, CreateCategoryInput } from '../../../types/admin/service';
+import type { Category, CreateCategoryInput } from '../../../types/category';
 
 const categorySchema = z.object({
     name: z.string().min(1, 'Category name is required'),

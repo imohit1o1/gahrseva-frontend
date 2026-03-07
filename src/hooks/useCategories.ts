@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { api, ENDPOINTS } from '../api';
 import type { ApiResponse } from '../types/apiResponse';
-import type { Category } from '../types/admin/service';
+import type { Category } from '../types/category';
 
 export const useCategories = () => {
     const fetchCategories = useQuery({

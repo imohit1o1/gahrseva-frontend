@@ -2,7 +2,7 @@ import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Link } from "@tanstack/react-router"
-import type { Category } from "@/types/admin/service"
+import type { Category } from "@/types/category"
 import { Loader2, ArrowRight, User, Mail, Lock, MapPin, Briefcase, IndianRupee, Image as ImageIcon, FileText, Check, X, PartyPopper } from "lucide-react"
 
 import {

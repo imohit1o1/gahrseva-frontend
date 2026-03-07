@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { api, ENDPOINTS } from '../../api';
-import type { Category, CreateCategoryInput } from '../../types/admin/service';
+import type { Category, CreateCategoryInput } from '../../types/category';
 import type { ApiResponse } from '../../types/apiResponse';
 
 export const useAdminCategories = () => {

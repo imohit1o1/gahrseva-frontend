@@ -1,5 +1,5 @@
 import { Calendar, Clock, MapPin, ReceiptText, Loader2 } from 'lucide-react';
-import type { Booking } from '../../../types/admin/service';
+import type { Booking } from '../../../types/booking';
 
 interface BookingListProps {
     bookings: Booking[] | undefined;

@@ -1,5 +1,5 @@
 import { Loader2 } from 'lucide-react';
-import type { Category } from '../../../types/admin/service';
+import type { Category } from '../../../types/category';
 import {
     Table,
     TableBody,

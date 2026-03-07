@@ -14,7 +14,7 @@ import {
     AlertDialogTrigger,
 } from "../../ui/alert-dialog";
 import { AlertCircle } from 'lucide-react';
-import type { Category } from '../../../types/admin/service';
+import type { Category } from '../../../types/category';
 
 interface CategoryTableRowProps {
     category: Category;
