@@ -39,6 +39,11 @@ export const ADMIN_NAV_LINKS = [
     { label: 'Bookings', href: '/admin/bookings' },
     { label: 'Reviews', href: '/admin/reviews' },
 ];
+
+export const PROVIDER_NAV_LINKS = [
+    { label: 'Dashboard', href: '/service-provider/dashboard' },
+    { label: 'Bookings', href: '/service-provider/bookings' },
+];
 export const CTA = [
     { label: 'Become a Service Provider', href: '/register/service-provider' },
     { label: 'Browse Services', href: '/service-providers' },

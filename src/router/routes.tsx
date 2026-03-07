@@ -10,6 +10,9 @@ import AdminProviders from "../pages/admin/AdminProviders";
 import AdminCategories from "../pages/admin/AdminCategories";
 import AdminBookings from "../pages/admin/AdminBookings";
 import AdminReviews from "../pages/admin/AdminReviews";
+import { ServiceProviderLayout, serviceProviderBeforeLoad } from "../pages/service-provider/ServiceProviderLayout";
+import ServiceProviderDashboard from "../pages/service-provider/ServiceProviderDashboard";
+import ServiceProviderBookings from "../pages/service-provider/ServiceProviderBookings";
 import { useAuthStore } from "../store/authStore";
 
 import { PublicLayout } from "./PublicLayout";
@@ -35,6 +38,9 @@ const dashboardRoute = createRoute({
         if (auth.user?.role === 'admin') {
             throw redirect({ to: '/admin/dashboard' });
         }
+        if (auth.user?.role === 'service_provider') {
+            throw redirect({ to: '/service-provider/dashboard' });
+        }
         // Fallback for now
         throw redirect({ to: '/' });
     }
@@ -45,6 +51,13 @@ const adminRoute = createRoute({
     path: "/admin",
     component: AdminLayout,
     beforeLoad: adminBeforeLoad,
+});
+
+const serviceProviderRoute = createRoute({
+    getParentRoute: () => rootRoute,
+    path: "/service-provider",
+    component: ServiceProviderLayout,
+    beforeLoad: serviceProviderBeforeLoad,
 });
 
 export const routeTree = rootRoute.addChildren([
@@ -97,6 +110,18 @@ export const routeTree = rootRoute.addChildren([
             getParentRoute: () => adminRoute,
             path: "/reviews",
             component: AdminReviews,
+        }),
+    ]),
+    serviceProviderRoute.addChildren([
+        createRoute({
+            getParentRoute: () => serviceProviderRoute,
+            path: "/dashboard",
+            component: ServiceProviderDashboard,
+        }),
+        createRoute({
+            getParentRoute: () => serviceProviderRoute,
+            path: "/bookings",
+            component: ServiceProviderBookings,
         }),
     ]),
 ]);

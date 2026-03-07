@@ -1,4 +1,4 @@
-export type UserRole = 'admin' | 'provider' | 'user';
+export type UserRole = 'admin' | 'service_provider' | 'user';
 
 export interface User {
     _id: string;
@@ -6,6 +6,7 @@ export interface User {
     email: string;
     avatar: string;
     role: UserRole;
+    isVerified?: boolean;
     profileComplete?: boolean;
     profile_id?: string | null;
     firstName?: string;

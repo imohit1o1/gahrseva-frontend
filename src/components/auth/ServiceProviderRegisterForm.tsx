@@ -1,6 +1,19 @@
+import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Loader2, ArrowRight, User, Mail, Lock, MapPin, Briefcase, IndianRupee, Image as ImageIcon, FileText, Check, X } from "lucide-react"
+import { Link } from "@tanstack/react-router"
+import type { Category } from "@/types/admin/service"
+import { Loader2, ArrowRight, User, Mail, Lock, MapPin, Briefcase, IndianRupee, Image as ImageIcon, FileText, Check, X, PartyPopper } from "lucide-react"
+
+import {
+    AlertDialog,
+    AlertDialogAction,
+    AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
+    AlertDialogTitle,
+} from "@/components/ui/alert-dialog"
 import { useUpload } from "@/hooks/useUpload"
 
 import { Button } from "@/components/ui/button"
@@ -27,6 +40,7 @@ export function ServiceProviderRegisterForm() {
     const { registerServiceProvider, isLoading, error } = useAuth()
     const { categories, isLoading: isCategoriesLoading } = useCategories()
     const { uploadImage, isUploading, uploadError } = useUpload()
+    const [showSuccessDialog, setShowSuccessDialog] = useState(false)
 
     const form = useForm<ServiceProviderRegisterValues>({
         resolver: zodResolver(serviceProviderRegisterSchema),
@@ -59,8 +73,7 @@ export function ServiceProviderRegisterForm() {
     const onSubmit = async (values: ServiceProviderRegisterValues) => {
         const result = await registerServiceProvider(values)
         if (result.success) {
-            // Handle success (e.g., redirect or show success message)
-            console.log("Service provider registered successfully")
+            setShowSuccessDialog(true)
         }
     }
 
@@ -207,7 +220,7 @@ export function ServiceProviderRegisterForm() {
                                         </div>
                                     </SelectTrigger>
                                     <SelectContent className="rounded-xl">
-                                        {categories?.map((cat) => (
+                                        {categories?.map((cat: Category) => (
                                             <SelectItem key={cat._id} value={cat._id} className="rounded-lg">
                                                 {cat.name}
                                             </SelectItem>
@@ -356,6 +369,35 @@ export function ServiceProviderRegisterForm() {
                     </div>
                 </Button>
             </div>
+
+            <AlertDialog open={showSuccessDialog} onOpenChange={setShowSuccessDialog}>
+                <AlertDialogContent className="rounded-[2.5rem] p-8 md:p-12 border-border/60 shadow-2xl animate-in zoom-in-95 duration-300">
+                    <AlertDialogHeader className="space-y-6">
+                        <div className="mx-auto size-24 rounded-full bg-primary/10 flex items-center justify-center text-primary animate-bounce">
+                            <PartyPopper size={48} strokeWidth={1.5} />
+                        </div>
+                        <div className="space-y-3 text-center">
+                            <AlertDialogTitle className="text-3xl font-black tracking-tight text-foreground">
+                                Registration Successful!
+                            </AlertDialogTitle>
+                            <AlertDialogDescription className="text-base text-muted-foreground font-medium leading-relaxed">
+                                Welcome to the <span className="text-primary font-bold">GharSeva</span> family. Your professional profile has been created successfully. You can now log in to start receiving service requests.
+                            </AlertDialogDescription>
+                        </div>
+                    </AlertDialogHeader>
+                    <AlertDialogFooter className="mt-10 sm:justify-center">
+                        <AlertDialogAction asChild>
+                            <Link
+                                to="/login"
+                                className="h-14 px-10 text-base font-black bg-primary hover:bg-primary/90 text-white rounded-2xl shadow-xl shadow-primary/20 transition-all hover:-translate-y-0.5 active:scale-95 cursor-pointer flex items-center justify-center gap-2"
+                            >
+                                Continue to Login
+                                <ArrowRight className="size-5" />
+                            </Link>
+                        </AlertDialogAction>
+                    </AlertDialogFooter>
+                </AlertDialogContent>
+            </AlertDialog>
         </form>
     )
 }
