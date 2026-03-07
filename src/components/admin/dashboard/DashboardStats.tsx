@@ -1,4 +1,4 @@
-import { Users, ShieldCheck, CalendarCheck, IndianRupee, Ban, CheckCircle2, Clock } from 'lucide-react';
+import { Users, ShieldCheck, CalendarCheck, IndianRupee, Ban, CheckCircle2, Clock, LayoutGrid, Star } from 'lucide-react';
 import type { AdminAnalyticsOverview } from '../../../types/admin/analytics';
 
 interface DashboardStatsProps {
@@ -11,7 +11,8 @@ export function DashboardStats({ analytics, isLoading }: DashboardStatsProps) {
         { label: "Total Users", value: analytics?.totalUsers || 0, icon: Users, color: "text-blue-500", bg: "bg-blue-500/10", border: "border-blue-500/20" },
         { label: "Total Revenue", value: `₹${(analytics?.totalRevenue || 0).toLocaleString()}`, icon: IndianRupee, color: "text-emerald-500", bg: "bg-emerald-500/10", border: "border-emerald-500/20" },
         { label: "Total Providers", value: analytics?.totalProviders || 0, icon: ShieldCheck, color: "text-indigo-500", bg: "bg-indigo-500/10", border: "border-indigo-500/20" },
-        { label: "Total Bookings", value: analytics?.totalBookings || 0, icon: CalendarCheck, color: "text-amber-500", bg: "bg-amber-500/10", border: "border-amber-500/20" }
+        { label: "Total Bookings", value: analytics?.totalBookings || 0, icon: CalendarCheck, color: "text-amber-500", bg: "bg-amber-500/10", border: "border-amber-500/20" },
+        { label: "Total Categories", value: analytics?.totalCategories || 0, icon: LayoutGrid, color: "text-purple-500", bg: "bg-purple-500/10", border: "border-purple-500/20" }
     ];
 
     const pendingProviders = (analytics?.totalProviders || 0) - (analytics?.totalApprovedProviders || 0);
@@ -20,13 +21,14 @@ export function DashboardStats({ analytics, isLoading }: DashboardStatsProps) {
         { label: "Approved Providers", value: analytics?.totalApprovedProviders || 0, icon: ShieldCheck, color: "text-indigo-500" },
         { label: "Pending Providers", value: pendingProviders, icon: Clock, color: "text-amber-500" },
         { label: "Completed Bookings", value: analytics?.totalCompletedBookings || 0, icon: CheckCircle2, color: "text-emerald-500" },
-        { label: "Cancelled Bookings", value: analytics?.totalCancelledBookings || 0, icon: Ban, color: "text-destructive" }
+        { label: "Cancelled Bookings", value: analytics?.totalCancelledBookings || 0, icon: Ban, color: "text-destructive" },
+        { label: "Total Reviews", value: analytics?.totalReviews || 0, icon: Star, color: "text-amber-400" }
     ];
 
     return (
         <div className="space-y-4">
             {/* Primary Stats */}
-            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
                 {primary.map((stat, i) => (
                     <div key={i} className={`flex items-center gap-4 p-4 rounded-2xl border ${stat.border} bg-card shadow-sm group hover:shadow-md transition-all`}>
                         <div className={`shrink-0 flex items-center justify-center size-12 rounded-xl border border-border/50 ${stat.bg} ${stat.color} transition-transform group-hover:scale-105`}>
@@ -43,7 +45,7 @@ export function DashboardStats({ analytics, isLoading }: DashboardStatsProps) {
             </div>
 
             {/* Secondary Stats */}
-            <div className="grid gap-3 grid-cols-2 lg:grid-cols-4">
+            <div className="grid gap-3 grid-cols-2 lg:grid-cols-5">
                 {secondary.map((stat, i) => (
                     <div key={i} className="flex items-center gap-3 bg-muted/20 border border-border/40 rounded-xl p-2.5">
                         <div className={`shrink-0 p-1.5 rounded-lg bg-background shadow-sm ${stat.color}`}>

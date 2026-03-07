@@ -2,19 +2,42 @@ import { useState } from 'react';
 import { useAdminCategories } from '../../hooks/admin/useAdminCategories';
 import { Button } from '../../components/ui/button';
 import { Plus } from 'lucide-react';
-import { CategoryList } from '../../components/admin/categories/CategoryList';
-import { CategoryForm } from '../../components/admin/categories/CategoryForm';
+import { CategoriesTable } from '../../components/admin/categories/CategoriesTable';
+import { CategoryDialog } from '../../components/admin/categories/CategoryDialog';
+import type { Category, CreateCategoryInput } from '../../types/admin/service';
 
 export default function AdminCategories() {
-    const { categories, isLoading, createCategory, deleteCategory } = useAdminCategories();
-    const [isAdding, setIsAdding] = useState(false);
+    const { categories, isLoading, createCategory, updateCategory, deleteCategory } = useAdminCategories();
+    const [isDialogOpen, setIsDialogOpen] = useState(false);
+    const [selectedCategory, setSelectedCategory] = useState<Category | null>(null);
 
-    const handleCreate = async (data: { name: string; description: string }) => {
+    const handleSubmit = async (data: CreateCategoryInput) => {
         try {
-            await createCategory.mutateAsync(data);
-            setIsAdding(false);
+            if (selectedCategory) {
+                await updateCategory.mutateAsync({ _id: selectedCategory._id, ...data });
+            } else {
+                await createCategory.mutateAsync(data);
+            }
+            setIsDialogOpen(false);
+            setSelectedCategory(null);
         } catch (err) {
-            console.error('Failed to create category', err);
+            console.error('Failed to save category', err);
+        }
+    };
+
+    const handleEdit = (category: Category) => {
+        setSelectedCategory(category);
+        setIsDialogOpen(true);
+    };
+
+    const handleAddClick = () => {
+        setSelectedCategory(null);
+        setIsDialogOpen(true);
+    };
+
+    const handleDelete = (id: string) => {
+        if (window.confirm('Are you sure you want to delete this category?')) {
+            deleteCategory.mutate(id);
         }
     };
 
@@ -27,21 +50,27 @@ export default function AdminCategories() {
                         Manage service categories and tags.
                     </p>
                 </div>
-                <Button onClick={() => setIsAdding(!isAdding)} className="rounded-xl font-bold">
-                    {isAdding ? 'Cancel' : (
-                        <>
-                            <Plus size={18} className="mr-2" />
-                            Add Category
-                        </>
-                    )}
+                <Button onClick={handleAddClick} className="rounded-xl font-bold">
+                    <Plus size={18} className="mr-2" />
+                    Add Category
                 </Button>
             </div>
 
-            {isAdding && (
-                <CategoryForm onSubmit={handleCreate} isPending={createCategory.isPending} />
-            )}
+            <CategoryDialog
+                open={isDialogOpen}
+                onOpenChange={setIsDialogOpen}
+                onSubmit={handleSubmit}
+                isPending={createCategory.isPending || updateCategory.isPending}
+                category={selectedCategory}
+            />
 
-            <CategoryList categories={categories} isLoading={isLoading} deleteCategory={deleteCategory} />
+            <CategoriesTable
+                categories={categories}
+                isLoading={isLoading}
+                onEdit={handleEdit}
+                onDelete={handleDelete}
+                isDeleting={deleteCategory.isPending ? (deleteCategory.variables as string) : null}
+            />
         </div>
     );
 }

@@ -1,18 +1,25 @@
 export interface Category {
     _id: string;
     name: string;
-    description?: string;
-    icon?: string;
+    slug: string;
     image?: string;
-    is_active: boolean;
-    created_at: string;
-    updated_at: string;
+    description?: string;
+    sortOrder: number;
+    isActive: boolean;
+    isFeatured: boolean;
+    createdAt: string;
+    updatedAt: string;
+    __v: number;
 }
 
 export interface CreateCategoryInput {
     name: string;
-    description?: string;
-    image?: string;
+    slug?: string;
+    image: string;
+    description: string;
+    sortOrder: number;
+    isActive?: boolean;
+    isFeatured?: boolean;
 }
 
 export interface ServiceProvider {

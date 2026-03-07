@@ -7,6 +7,7 @@ export interface AdminAnalyticsOverview {
     totalCancelledBookings: number;
     totalReviews: number;
     totalRevenue: number;
+    totalCategories: number;
 }
 
 export type AdminAnalyticsResponse = AdminAnalyticsOverview;
