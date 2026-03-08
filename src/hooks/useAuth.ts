@@ -34,6 +34,8 @@ export const useAuth = () => {
                 navigate({ to: '/admin/dashboard' });
             } else if (user?.role === 'service_provider') {
                 navigate({ to: '/service-provider/dashboard' });
+            } else {
+                navigate({ to: '/' });
             }
         } catch (err: any) {
             store.setError(err.response?.data?.message || 'Login failed');

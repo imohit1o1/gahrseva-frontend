@@ -7,13 +7,17 @@ import {
     NavigationMenuList,
     NavigationMenuTrigger,
 } from '../../ui/navigation-menu';
-import { NAV_LINKS } from '../../../constants';
+import { NAV_LINKS, CUSTOMER_NAV_LINKS } from '../../../constants';
 import { useCategories } from '../../../hooks/useCategories';
 import { chunkIntoColumns } from '../../../lib/array-utils';
 import { Loader2 } from 'lucide-react';
+import { useAuthStore } from '../../../store/authStore';
 
 export function DesktopNav() {
     const { categories, isLoading } = useCategories();
+    const { user, isAuthenticated } = useAuthStore();
+
+    const links = (isAuthenticated && user?.role === 'customer') ? CUSTOMER_NAV_LINKS : NAV_LINKS;
 
     const chunkedCategories = chunkIntoColumns(categories, 3);
 
@@ -23,7 +27,7 @@ export function DesktopNav() {
         <div className="hidden lg:flex">
             <NavigationMenu>
                 <NavigationMenuList className="gap-2">
-                    {NAV_LINKS.map((link) => {
+                    {links.map((link) => {
                         if (link.label === 'Categories') {
                             return (
                                 <NavigationMenuItem key={link.label}>
@@ -46,7 +50,7 @@ export function DesktopNav() {
                                                             <li key={item._id}>
                                                                 <NavigationMenuLink asChild>
                                                                     <Link
-                                                                        to={`${NAV_LINKS[2].href}?category_slug=${encodeURIComponent(item.slug)}`}
+                                                                        to={`${links[2].href}?category_slug=${encodeURIComponent(item.slug)}`}
                                                                         className="block rounded-xl p-2.5 transition-all hover:bg-primary/5 group/navitem"
                                                                     >
                                                                         <p className="text-sm font-bold text-foreground group-hover/navitem:text-primary">

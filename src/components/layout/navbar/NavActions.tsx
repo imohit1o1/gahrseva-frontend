@@ -35,6 +35,18 @@ export function NavActions({ isAuthenticated, user, logout, openAuthDialog }: Na
         );
     }
 
+    const dropdownItems = PROFILE_DROPDOWN.filter(item => {
+        if (item.label === 'Dashboard') {
+            return user?.role === 'customer';
+        }
+        return true;
+    }).map(item => {
+        if (item.label === 'Dashboard' && user?.role === 'customer') {
+            return { ...item, label: 'Profile', href: '/profile' };
+        }
+        return item;
+    });
+
     return (
         <div className="hidden items-center gap-3 lg:flex">
             <DropdownMenu>
@@ -46,7 +58,7 @@ export function NavActions({ isAuthenticated, user, logout, openAuthDialog }: Na
                     </button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end" className="w-48 rounded-xl p-1 shadow-2xl">
-                    {PROFILE_DROPDOWN.map((item, index) => (
+                    {dropdownItems.map((item, index) => (
                         <div key={item.label}>
                             <DropdownMenuItem
                                 onClick={item.label === 'Logout' ? logout : undefined}

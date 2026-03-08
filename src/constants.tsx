@@ -43,6 +43,13 @@ export const NAV_LINKS = [
     { label: 'Contact', href: '/contact' },
 ];
 
+export const CUSTOMER_NAV_LINKS = [
+    { label: 'Home', href: '/' },
+    { label: 'Categories', href: '/service-categories' },
+    { label: 'Providers', href: '/service-providers' },
+    { label: 'Bookings', href: '/bookings' },
+];
+
 export const ADMIN_NAV_LINKS = [
     { label: 'Dashboard', href: '/admin/dashboard' },
     { label: 'Categories', href: '/admin/categories' },

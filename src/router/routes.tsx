@@ -43,7 +43,7 @@ const dashboardRoute = createRoute({
         if (auth.user?.role === 'service_provider') {
             throw redirect({ to: '/service-provider/dashboard' });
         }
-        // Fallback for now
+        // No dashboard for customers, redirect to home
         throw redirect({ to: '/' });
     }
 });
@@ -74,6 +74,17 @@ export const routeTree = rootRoute.addChildren([
             getParentRoute: () => publicRoute,
             path: "/",
             component: Home,
+            beforeLoad: async () => {
+                const auth = useAuthStore.getState();
+                if (auth.isAuthenticated) {
+                    if (auth.user?.role === 'admin') {
+                        throw redirect({ to: '/admin/dashboard' });
+                    }
+                    if (auth.user?.role === 'service_provider') {
+                        throw redirect({ to: '/service-provider/dashboard' });
+                    }
+                }
+            }
         }),
         createRoute({
             getParentRoute: () => publicRoute,

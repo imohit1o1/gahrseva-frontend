@@ -1,6 +1,6 @@
 import { Link } from '@tanstack/react-router';
 import { Button } from '../../ui/button';
-import { NAV_LINKS, CATEGORIES_MENU, CTA, PROFILE_DROPDOWN } from '../../../constants';
+import { NAV_LINKS, CUSTOMER_NAV_LINKS, CATEGORIES_MENU, CTA, PROFILE_DROPDOWN } from '../../../constants';
 
 interface MobileMenuProps {
     isOpen: boolean;
@@ -14,10 +14,12 @@ interface MobileMenuProps {
 export function MobileMenu({ isOpen, setOpen, isAuthenticated, user, logout, openAuthDialog }: MobileMenuProps) {
     if (!isOpen) return null;
 
+    const links = (isAuthenticated && user?.role === 'customer') ? CUSTOMER_NAV_LINKS : NAV_LINKS;
+
     return (
         <div className="border-t border-border/60 bg-background px-4 pb-4 lg:hidden">
             <nav className="flex flex-col gap-1 pt-3">
-                {NAV_LINKS.map((link) => (
+                {links.map((link) => (
                     <Link
                         key={link.label}
                         to={link.href === '#' ? '/' : (link.href.startsWith('#') ? '/' : link.href)}
@@ -78,28 +80,38 @@ export function MobileMenu({ isOpen, setOpen, isAuthenticated, user, logout, ope
                         </div>
                     </div>
                     <div className="grid grid-cols-2 gap-2 mt-1">
-                        {PROFILE_DROPDOWN.map((item) => (
-                            <div key={item.label} className="w-full">
-                                {item.label === 'Logout' ? (
-                                    <Button
-                                        variant="outline"
-                                        size="sm"
-                                        onClick={() => { logout(); setOpen(false); }}
-                                        className="w-full rounded-xl font-bold border-destructive/20 text-destructive hover:bg-destructive/5"
-                                    >
-                                        {item.icon}
-                                        <span className="ml-2">{item.label}</span>
-                                    </Button>
-                                ) : (
-                                    <Link to={item.href} onClick={() => setOpen(false)} className="w-full">
-                                        <Button size="sm" className="w-full bg-primary text-black rounded-xl font-bold shadow-md shadow-primary/10">
+                        {PROFILE_DROPDOWN.filter(item => {
+                            if (item.label === 'Dashboard') {
+                                return user?.role === 'customer';
+                            }
+                            return true;
+                        }).map(item => {
+                            const label = (item.label === 'Dashboard' && user?.role === 'customer') ? 'Profile' : item.label;
+                            const href = (item.label === 'Dashboard' && user?.role === 'customer') ? '/profile' : item.href;
+
+                            return (
+                                <div key={item.label} className="w-full">
+                                    {item.label === 'Logout' ? (
+                                        <Button
+                                            variant="outline"
+                                            size="sm"
+                                            onClick={() => { logout(); setOpen(false); }}
+                                            className="w-full rounded-xl font-bold border-destructive/20 text-destructive hover:bg-destructive/5"
+                                        >
                                             {item.icon}
                                             <span className="ml-2">{item.label}</span>
                                         </Button>
-                                    </Link>
-                                )}
-                            </div>
-                        ))}
+                                    ) : (
+                                        <Link to={href} onClick={() => setOpen(false)} className="w-full">
+                                            <Button size="sm" className="w-full bg-primary text-black rounded-xl font-bold shadow-md shadow-primary/10">
+                                                {item.icon}
+                                                <span className="ml-2">{label}</span>
+                                            </Button>
+                                        </Link>
+                                    )}
+                                </div>
+                            );
+                        })}
                     </div>
                 </div>
             )}
