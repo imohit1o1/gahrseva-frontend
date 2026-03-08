@@ -1,3 +1,4 @@
+import { Link } from '@tanstack/react-router';
 import { MapPin, Clock, ArrowRight, Star } from 'lucide-react';
 import { Card, CardHeader, CardContent, CardFooter, CardTitle, CardDescription } from '../ui/card';
 import { Badge } from '../ui/badge';
@@ -87,10 +88,14 @@ export function ServiceProviderCard({ provider }: { provider: any }) {
                 <div className="flex flex-col">
                     <span className="text-xl font-bold text-slate-900">{price}</span>
                 </div>
-                <button className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-primary/10 py-2.5 text-sm font-bold text-primary transition-all hover:bg-primary hover:text-white hover:shadow-lg hover:shadow-primary/20 hover:-translate-y-0.5 active:translate-y-0 group/btn">
+                <Link
+                    to="/service-providers/$providerId"
+                    params={{ providerId: provider._id }}
+                    className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-primary/10 py-2.5 text-sm font-bold text-primary transition-all hover:bg-primary hover:text-white hover:shadow-lg hover:shadow-primary/20 hover:-translate-y-0.5 active:translate-y-0 group/btn"
+                >
                     Book Now
                     <ArrowRight size={16} className="transition-transform group-hover/btn:translate-x-1" />
-                </button>
+                </Link>
             </CardFooter>
         </Card>
     );

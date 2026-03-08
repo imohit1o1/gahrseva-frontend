@@ -2,6 +2,7 @@ import { createRootRoute, createRoute, redirect } from "@tanstack/react-router";
 import { RootLayout } from "./RootLayout";
 import Home from "../pages/Home";
 import ServiceProviders from "../pages/ServiceProviders";
+import ServiceProviderDetails from "../pages/ServiceProviderDetails";
 import ServiceProviderRegister from "../pages/ServiceProviderRegister";
 import { AdminLayout, adminBeforeLoad } from "../pages/admin/AdminLayout";
 import AdminDashboard from "../pages/admin/AdminDashboard";
@@ -61,6 +62,12 @@ const serviceProviderRoute = createRoute({
     beforeLoad: serviceProviderBeforeLoad,
 });
 
+export const providerDetailsRoute = createRoute({
+    getParentRoute: () => publicRoute,
+    path: "/service-providers/$providerId",
+    component: ServiceProviderDetails,
+});
+
 export const routeTree = rootRoute.addChildren([
     publicRoute.addChildren([
         createRoute({
@@ -79,6 +86,7 @@ export const routeTree = rootRoute.addChildren([
             component: ServiceProviders,
             validateSearch: (search) => serviceProvidersSearchSchema.parse(search),
         }),
+        providerDetailsRoute,
     ]),
     dashboardRoute,
     adminRoute.addChildren([

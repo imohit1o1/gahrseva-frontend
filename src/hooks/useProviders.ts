@@ -27,11 +27,11 @@ export const useProviders = (filters: Partial<ServiceProvidersSearch> = {}) => {
 };
 
 export const useProvider = (id: string) => {
-    return useQuery({
+    return useQuery<ApiResponse<ServiceProvider>>({
         queryKey: ['providers', id],
         queryFn: async () => {
             const res = await api.get<ApiResponse<ServiceProvider>>(ENDPOINTS.USER.PROVIDER_BY_ID(id));
-            return res.data;
+            return res;
         },
         enabled: !!id,
     });

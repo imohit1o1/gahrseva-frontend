@@ -11,6 +11,11 @@ export interface ServiceProvider {
         name: string;
         slug: string;
     };
+    category?: {
+        _id: string;
+        name: string;
+        slug: string;
+    };
     city: string;
     area: string;
     pincode: string;
@@ -21,6 +26,8 @@ export interface ServiceProvider {
     is_available: boolean;
     is_featured: boolean;
     is_approved: boolean;
+    rating?: number;
+    reviews?: number;
     approved_by?: {
         _id: string;
         display_name: string;
@@ -30,6 +37,7 @@ export interface ServiceProvider {
     createdAt: string;
     updatedAt: string;
     __v?: number;
+    analytics?: ProviderAnalytics;
 }
 
 export interface ProviderAnalytics {
