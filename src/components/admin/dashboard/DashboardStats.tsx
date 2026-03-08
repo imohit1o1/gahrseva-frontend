@@ -1,12 +1,9 @@
 import { Users, ShieldCheck, CalendarCheck, IndianRupee, Ban, CheckCircle2, Clock, LayoutGrid, Star } from 'lucide-react';
-import type { AdminAnalyticsOverview } from '../../../types/admin/analytics';
+import { useAdminAnalytics } from '../../../hooks/admin/useAdminAnalytics';
 
-interface DashboardStatsProps {
-    analytics: AdminAnalyticsOverview | undefined;
-    isLoading: boolean;
-}
+export function DashboardStats() {
+    const { data: analytics, isLoading } = useAdminAnalytics();
 
-export function DashboardStats({ analytics, isLoading }: DashboardStatsProps) {
     const primary = [
         { label: "Total Users", value: analytics?.totalUsers || 0, icon: Users, color: "text-blue-500", bg: "bg-blue-500/10", border: "border-blue-500/20" },
         { label: "Total Revenue", value: `₹${(analytics?.totalRevenue || 0).toLocaleString()}`, icon: IndianRupee, color: "text-emerald-500", bg: "bg-emerald-500/10", border: "border-emerald-500/20" },

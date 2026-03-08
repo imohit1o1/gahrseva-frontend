@@ -1,9 +1,6 @@
-import { useAdminAnalytics } from '../../hooks/admin/useAdminAnalytics';
 import { DashboardStats } from '../../components/admin/dashboard/DashboardStats';
 
 export default function AdminDashboard() {
-    const { data: analytics, isLoading: isAnalyticsLoading } = useAdminAnalytics();
-
     return (
         <div className="space-y-6">
             <div>
@@ -13,7 +10,7 @@ export default function AdminDashboard() {
                 </p>
             </div>
 
-            <DashboardStats analytics={analytics} isLoading={isAnalyticsLoading} />
+            <DashboardStats />
         </div>
     );
 }

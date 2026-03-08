@@ -23,7 +23,12 @@ export const ENDPOINTS = {
     PROFILE: `${API_PREFIX}/service-provider/profile`,
     AVAILABILITY: `${API_PREFIX}/service-provider/profile/availability`,
     BOOKINGS: `${API_PREFIX}/service-provider/bookings`,
-    UPDATE_BOOKING_STATUS: (id: string) => `${API_PREFIX}/service-provider/bookings/${id}/status`,
+    BOOKING_BY_ID: (id: string) => `${API_PREFIX}/service-provider/bookings/${id}`,
+    ACCEPT_BOOKING: (id: string) => `${API_PREFIX}/service-provider/bookings/${id}/accept`,
+    REJECT_BOOKING: (id: string) => `${API_PREFIX}/service-provider/bookings/${id}/reject`,
+    START_BOOKING: (id: string) => `${API_PREFIX}/service-provider/bookings/${id}/in-progress`,
+    COMPLETE_BOOKING: (id: string) => `${API_PREFIX}/service-provider/bookings/${id}/complete`,
+    CANCEL_BOOKING: (id: string) => `${API_PREFIX}/service-provider/bookings/${id}/cancel`,
     REVIEWS: `${API_PREFIX}/service-provider/reviews`,
     ANALYTICS: `${API_PREFIX}/service-provider/analytics`
   },

@@ -23,10 +23,20 @@ export const useUpdateBookingStatus = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: async ({ id, status }: { id: string, status: string }) => {
+        mutationFn: async ({ id, status, reason }: { id: string, status: string, reason?: string }) => {
+            let endpoint;
+            switch (status) {
+                case 'accepted': endpoint = ENDPOINTS.SERVICE_PROVIDER.ACCEPT_BOOKING(id); break;
+                case 'rejected': endpoint = ENDPOINTS.SERVICE_PROVIDER.REJECT_BOOKING(id); break;
+                case 'in_progress': endpoint = ENDPOINTS.SERVICE_PROVIDER.START_BOOKING(id); break;
+                case 'completed': endpoint = ENDPOINTS.SERVICE_PROVIDER.COMPLETE_BOOKING(id); break;
+                case 'cancelled': endpoint = ENDPOINTS.SERVICE_PROVIDER.CANCEL_BOOKING(id); break;
+                default: throw new Error(`Invalid status: ${status}`);
+            }
+
             const { data } = await api.patch<ApiResponse<Booking>>(
-                ENDPOINTS.SERVICE_PROVIDER.UPDATE_BOOKING_STATUS(id),
-                { status }
+                endpoint,
+                reason ? { cancel_reason: reason } : {}
             );
             return data;
         },
