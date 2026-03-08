@@ -18,6 +18,10 @@ export const ENDPOINTS = {
     ANALYTICS: `${API_PREFIX}/user/analytics`,
     PROVIDERS: `${API_PREFIX}/service-provider/list`,
     PROVIDER_BY_ID: (id: string) => `${API_PREFIX}/service-provider/${id}`,
+    BOOKINGS: `${API_PREFIX}/users/bookings`,
+    BOOKING_BY_ID: (id: string) => `${API_PREFIX}/users/bookings/${id}`,
+    CANCEL_BOOKING: (id: string) => `${API_PREFIX}/users/bookings/${id}/cancel`,
+    RESCHEDULE_BOOKING: (id: string) => `${API_PREFIX}/users/bookings/${id}/reschedule`,
   },
   SERVICE_PROVIDER: {
     PROFILE: `${API_PREFIX}/service-provider/profile`,

@@ -4,6 +4,7 @@ import Home from "../pages/Home";
 import ServiceProviders from "../pages/ServiceProviders";
 import ServiceProviderDetails from "../pages/ServiceProviderDetails";
 import ServiceProviderRegister from "../pages/ServiceProviderRegister";
+import Bookings from "../pages/Bookings";
 import { AdminLayout, adminBeforeLoad } from "../pages/admin/AdminLayout";
 import AdminDashboard from "../pages/admin/AdminDashboard";
 import AdminUsers from "../pages/admin/AdminUsers";
@@ -86,6 +87,26 @@ export const routeTree = rootRoute.addChildren([
                     }
                 }
             }
+        }),
+        createRoute({
+            getParentRoute: () => publicRoute,
+            path: "/bookings",
+            component: Bookings,
+            beforeLoad: async () => {
+                const auth = useAuthStore.getState();
+
+                if (!auth.isAuthenticated) {
+                    throw redirect({ to: '/' });
+                }
+
+                if (auth.user?.role === 'admin') {
+                    throw redirect({ to: '/admin/dashboard' });
+                }
+
+                if (auth.user?.role === 'service_provider') {
+                    throw redirect({ to: '/service-provider/dashboard' });
+                }
+            },
         }),
         createRoute({
             getParentRoute: () => publicRoute,
