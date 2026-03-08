@@ -1,4 +1,15 @@
+import { useProviderBookings, useUpdateBookingStatus } from "../../hooks/service-provider/useProviderBookings";
+import { ProviderBookingsTable } from "../../components/providers/bookings/ProviderBookingsTable";
+
 export default function ServiceProviderBookings() {
+    // Only fetch requested bookings
+    const { data, isLoading } = useProviderBookings('requested');
+    const updateStatus = useUpdateBookingStatus();
+
+    const handleStatusChange = (id: string, status: string) => {
+        updateStatus.mutate({ id, status });
+    };
+
     return (
         <div className="space-y-6">
             <div className="flex flex-col gap-2">
@@ -10,15 +21,12 @@ export default function ServiceProviderBookings() {
                 </p>
             </div>
 
-            <div className="p-16 rounded-[3rem] bg-background border border-border/60 shadow-sm text-center space-y-4">
-                <div className="size-20 bg-primary/10 rounded-full flex items-center justify-center mx-auto text-primary">
-                    <span className="text-2xl font-black">📅</span>
-                </div>
-                <h3 className="text-xl font-black text-foreground">No bookings found</h3>
-                <p className="text-muted-foreground max-w-sm mx-auto font-medium">
-                    You haven't received any bookings yet. Keep your profile active to start getting requests!
-                </p>
-            </div>
+            <ProviderBookingsTable
+                bookings={data?.bookings}
+                isLoading={isLoading}
+                onStatusChange={handleStatusChange}
+                isUpdatingId={updateStatus.isPending ? (updateStatus.variables?.id as string) : null}
+            />
         </div>
     );
 }

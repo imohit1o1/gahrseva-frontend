@@ -29,6 +29,12 @@ export const useAuth = () => {
 
             store.setLoading(false);
             store.closeAuthDialog();
+
+            if (user?.role === 'admin') {
+                navigate({ to: '/admin/dashboard' });
+            } else if (user?.role === 'service_provider') {
+                navigate({ to: '/service-provider/dashboard' });
+            }
         } catch (err: any) {
             store.setError(err.response?.data?.message || 'Login failed');
             store.setLoading(false);
@@ -59,6 +65,12 @@ export const useAuth = () => {
 
             store.setLoading(false);
             store.closeAuthDialog();
+
+            if (user?.role === 'admin') {
+                navigate({ to: '/admin/dashboard' });
+            } else if (user?.role === 'service_provider') {
+                navigate({ to: '/service-provider/dashboard' });
+            }
         } catch (err: any) {
             store.setError(err.response?.data?.message || 'Registration failed');
             store.setLoading(false);

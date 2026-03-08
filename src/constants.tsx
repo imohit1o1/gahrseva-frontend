@@ -24,9 +24,21 @@ export const CATEGORIES_LIST = [
     { label: 'Gardening' },
 ];
 
+export const CATEGORY_COLORS: Record<string, { bg: string, text: string, border: string }> = {
+    'Home Cleaning': { bg: 'bg-rose-50/50', text: 'text-rose-600', border: 'border-rose-100' },
+    'Plumbing': { bg: 'bg-blue-50/50', text: 'text-blue-600', border: 'border-blue-100' },
+    'Electrical': { bg: 'bg-amber-50/50', text: 'text-amber-600', border: 'border-amber-100' },
+    'Carpentry': { bg: 'bg-orange-50/50', text: 'text-orange-600', border: 'border-orange-100' },
+    'Painting': { bg: 'bg-purple-50/50', text: 'text-purple-600', border: 'border-purple-100' },
+    'Appliance Repair': { bg: 'bg-cyan-50/50', text: 'text-cyan-600', border: 'border-cyan-100' },
+    'Pest Control': { bg: 'bg-emerald-50/50', text: 'text-emerald-600', border: 'border-emerald-100' },
+    'Gardening': { bg: 'bg-lime-50/50', text: 'text-lime-600', border: 'border-lime-100' },
+};
+
 export const NAV_LINKS = [
     { label: 'Home', href: '/' },
     { label: 'Categories', href: '/service-categories' },
+    { label: 'Providers', href: '/service-providers' },
     { label: 'About', href: '/about' },
     { label: 'Contact', href: '/contact' },
 ];
@@ -58,28 +70,28 @@ export const PROFILE_DROPDOWN = [
 export const SERVICE_TAGS = ['Electricians', 'Plumbers', 'Cleaning', 'Appliance Repair'];
 
 export const CATEGORIES = [
-    { label: 'Home Cleaning', image: '/src/assets/categories/cat_cleaning.webp', href: '/service-providers' },
-    { label: 'Plumbing', image: '/src/assets/categories/cat_plumbing.webp', href: '/service-providers' },
-    { label: 'Electrical', image: '/src/assets/categories/cat_electrical.webp', href: '/service-providers' },
-    { label: 'Carpentry', image: '/src/assets/categories/cat_carpentry.webp', href: '/service-providers' },
-    { label: 'Painting', image: '/src/assets/categories/cat_painting.webp', href: '/service-providers' },
-    { label: 'Appliance Repair', image: '/src/assets/categories/cat_appliance.webp', href: '/service-providers' },
-    { label: 'Pest Control', image: '/src/assets/categories/cat_pest_control.webp', href: '/service-providers' },
-    { label: 'Gardening', image: '/src/assets/categories/cat_gardening.webp', href: '/service-providers' },
+    { label: 'Home Cleaning', slug: 'home-cleaning', image: '/src/assets/categories/cat_cleaning.webp', href: '/service-providers' },
+    { label: 'Plumbing', slug: 'plumbing', image: '/src/assets/categories/cat_plumbing.webp', href: '/service-providers' },
+    { label: 'Electrical', slug: 'electrical', image: '/src/assets/categories/cat_electrical.webp', href: '/service-providers' },
+    { label: 'Carpentry', slug: 'carpentry', image: '/src/assets/categories/cat_carpentry.webp', href: '/service-providers' },
+    { label: 'Painting', slug: 'painting', image: '/src/assets/categories/cat_painting.webp', href: '/service-providers' },
+    { label: 'Appliance Repair', slug: 'appliance-repair', image: '/src/assets/categories/cat_appliance.webp', href: '/service-providers' },
+    { label: 'Pest Control', slug: 'pest-control', image: '/src/assets/categories/cat_pest_control.webp', href: '/service-providers' },
+    { label: 'Gardening', slug: 'gardening', image: '/src/assets/categories/cat_gardening.webp', href: '/service-providers' },
 ];
 
-export const PROBLEM_POINTS = [
-    { label: 'Hidden pricing', description: 'Unexpected costs creeping in after the job is done.', icon: 'EyeOff' },
-    { label: 'Unverified professionals', description: 'Strangers in your home without background checks.', icon: 'ShieldAlert' },
-    { label: 'Delayed services', description: 'Professionals arriving late or constantly rescheduling.', icon: 'Clock' },
-];
+// export const PROBLEM_POINTS = [
+//     { label: 'Hidden pricing', description: 'Unexpected costs creeping in after the job is done.', icon: 'EyeOff' },
+//     { label: 'Unverified professionals', description: 'Strangers in your home without background checks.', icon: 'ShieldAlert' },
+//     { label: 'Delayed services', description: 'Professionals arriving late or constantly rescheduling.', icon: 'Clock' },
+// ];
 
-export const SOLUTION_POINTS = [
-    { label: 'Verified professionals', description: 'Every worker is strictly vetted and background-checked.', icon: 'UserCheck' },
-    { label: 'Transparent pricing', description: 'Know the exact cost before the job begins. No surprises.', icon: 'CreditCard' },
-    { label: 'Secure payments', description: 'Pay safely online or after the service is completed.', icon: 'ShieldCheck' },
-    { label: 'Service guarantee', description: 'Not satisfied? We will redo the work free of charge.', icon: 'ThumbsUp' },
-];
+// export const SOLUTION_POINTS = [
+//     { label: 'Verified professionals', description: 'Every worker is strictly vetted and background-checked.', icon: 'UserCheck' },
+//     { label: 'Transparent pricing', description: 'Know the exact cost before the job begins. No surprises.', icon: 'CreditCard' },
+//     { label: 'Secure payments', description: 'Pay safely online or after the service is completed.', icon: 'ShieldCheck' },
+//     { label: 'Service guarantee', description: 'Not satisfied? We will redo the work free of charge.', icon: 'ThumbsUp' },
+// ];
 
 export const HOW_IT_WORKS = [
     { title: 'Choose Service', description: 'Select from our wide range of professional home services.', icon: 'MousePointerClick' },
@@ -299,3 +311,10 @@ export const FAQS = [
         answer: "You can pay securely online through our platform or opt for cash on delivery after the service is completed."
     }
 ];
+
+export const PagintationConstants = Object.freeze({
+    PAGE: 1,
+    LIMIT: 10,
+    TOTAL: 0,
+    TOTAL_PAGES: 0,
+});

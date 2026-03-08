@@ -4,6 +4,7 @@ export interface ServiceProvider {
         _id: string;
         display_name: string;
         email: string;
+        isProfileComplete: boolean;
     };
     category_id: {
         _id: string;
@@ -15,7 +16,7 @@ export interface ServiceProvider {
     pincode: string;
     base_price: number;
     experience: number;
-    avatar?: string;
+    avatar: string;
     description: string;
     is_available: boolean;
     is_featured: boolean;
@@ -28,4 +29,17 @@ export interface ServiceProvider {
     approved_at?: string | null;
     createdAt: string;
     updatedAt: string;
+    __v?: number;
+}
+
+export interface ProviderAnalytics {
+    totalBookings: number;
+    completedBookings: number;
+    cancelledBookings: number;
+    pendingBookings: number;
+    activeBookings: number;
+    totalRevenue: number;
+    averageRating: number | null;
+    totalReviews: number;
+    bookingsByMonth: any[];
 }

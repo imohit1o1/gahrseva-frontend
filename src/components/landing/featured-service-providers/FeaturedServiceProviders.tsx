@@ -1,14 +1,18 @@
 import { ServiceProviderCard } from '../../providers/ServiceProviderCard';
-import { MOCK_SERVICE_PROVIDERS } from '../../../constants';
 import { Link } from '@tanstack/react-router';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Loader2 } from 'lucide-react';
 import { SectionLayout } from '../section-layout/SectionLayout';
+import { useProviders } from '../../../hooks/useProviders';
 
 export function FeaturedServiceProviders() {
-    // Pick top 4 featured service providers
-    const featuredServiceProviders = MOCK_SERVICE_PROVIDERS.filter(p => p.is_featured).slice(0, 4);
+    const { data: providersResponse, isLoading } = useProviders({
+        limit: 6,
+        is_featured: 'true'
+    });
 
-    if (featuredServiceProviders.length === 0) return null;
+    const providers = providersResponse?.data?.providers || [];
+
+    if (!isLoading && providers.length === 0) return null;
 
     return (
         <SectionLayout>
@@ -38,9 +42,17 @@ export function FeaturedServiceProviders() {
 
                 {/* Service Providers grid */}
                 <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                    {featuredServiceProviders.map(provider => (
-                        <ServiceProviderCard key={provider.id} provider={provider} />
-                    ))}
+                    {isLoading ? (
+                        [...Array(3)].map((_, i) => (
+                            <div key={i} className="h-[280px] w-full bg-slate-100 animate-pulse rounded-2xl flex items-center justify-center">
+                                <Loader2 className="animate-spin text-slate-300" />
+                            </div>
+                        ))
+                    ) : (
+                        providers.map((provider: any) => (
+                            <ServiceProviderCard key={provider._id} provider={provider} />
+                        ))
+                    )}
                 </div>
             </div>
         </SectionLayout>

@@ -1,5 +1,5 @@
 import { MapPin, Clock, ArrowRight, Star } from 'lucide-react';
-import { Card, CardContent, CardFooter } from '../ui/card';
+import { Card, CardHeader, CardContent, CardFooter, CardTitle, CardDescription } from '../ui/card';
 import { Badge } from '../ui/badge';
 import { cn } from '../../lib/utils';
 
@@ -15,74 +15,81 @@ const CATEGORY_COLORS: Record<string, string> = {
 };
 
 export function ServiceProviderCard({ provider }: { provider: any }) {
+    const name = provider.user_id?.display_name || 'Service Provider';
+    const categoryName = provider.category_id?.name || 'General';
+    const location = `${provider.city}, ${provider.area}`;
+    const price = `₹${provider.base_price}`;
+    const experience = `Exp. ${provider.experience} years`;
+    const rating = provider.rating || 0;
+    const reviews = provider.reviews || 0;
+
     return (
-        <Card className="group relative overflow-hidden rounded-2xl bg-white border border-slate-200 transition-all hover:shadow-[0_8px_30px_rgb(0,0,0,0.08)] hover:border-primary/30 p-5 flex flex-col gap-4">
+        <Card className="group relative overflow-hidden rounded-xl bg-white transition-all hover:shadow-xl hover:border-primary/30 flex flex-col h-full py-0 gap-0">
+            {/* Full-width Avatar Section */}
+            <div className="relative h-56 w-full overflow-hidden shrink-0">
+                <img
+                    src={provider.avatar}
+                    alt={name}
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-x-0 bottom-0 h-2/3 bg-linear-to-t from-black/20 to-transparent" />
 
-            {/* Header: Avatar & Service Provider Info */}
-            <div className="flex items-center gap-2">
-                <div className="relative shrink-0">
-                    <img
-                        src={provider.image}
-                        alt={provider.name}
-                        className="h-16 w-16 rounded-full object-cover shadow-sm ring-2 ring-slate-100"
-                    />
-                </div>
-
-                <div className="flex-1 pt-1">
-                    <div className="flex items-start justify-between">
-                        <div className="flex-1 min-w-0">
-                            <h3 className="text-base font-bold text-slate-900 leading-tight group-hover:text-primary transition-colors truncate max-w-[150px]">
-                                {provider.name}
-                            </h3>
-                            <div className="mt-1">
-                                <Badge
-                                    variant="outline"
-                                    className={cn(
-                                        "font-medium text-[10px] uppercase tracking-wider",
-                                        CATEGORY_COLORS[provider.category] || 'bg-slate-50 text-slate-600 border-slate-100'
-                                    )}
-                                >
-                                    {provider.category}
-                                </Badge>
-                            </div>
-                        </div>
-                        <div className="flex flex-col items-end pt-1">
-                            <div className="flex items-center gap-1">
-                                <Star className="fill-primary text-primary" size={14} />
-                                <span className="text-sm font-bold text-slate-900 leading-none">{provider.rating}</span>
-                                <span className="text-[10px] text-slate-400 font-medium leading-none">({provider.reviews})</span>
-                            </div>
-                        </div>
+                {/* Active Badge at Top Right */}
+                {provider.is_available && (
+                    <div className="absolute top-4 right-4 flex items-center gap-1.5 bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full text-[9px] font-bold border border-emerald-200/60 shadow-sm">
+                        <div className="h-1 w-1 rounded-full bg-emerald-500 animate-pulse" />
+                        Active
                     </div>
-                </div>
+                )}
             </div>
 
-            {/* Middle: Stats & Description */}
-            <CardContent className="borde border-red-500 p-0 flex-1 flex flex-col justify-center space-y-3">
-                <div className="flex flex-wrap items-center gap-2">
-                    <Badge variant="outline" className="bg-slate-50/50 border-slate-200 text-slate-600 font-medium py-1 px-2.5 rounded-lg flex items-center gap-1.5 h-7">
-                        <Clock size={13} className="text-slate-400" />
-                        {provider.experience}
-                    </Badge>
-                    <Badge variant="outline" className="bg-slate-50/50 border-slate-200 text-slate-600 font-medium py-1 px-2.5 rounded-lg flex items-center gap-1.5 h-7">
-                        <MapPin size={13} className="text-slate-400" />
-                        <span className="truncate max-w-[200px]">{provider.location}</span>
+            <CardHeader className="pt-3 pb-2 px-6">
+                <div className="flex items-center justify-between gap-2">
+                    <CardTitle className="text-lg font-bold text-slate-900 group-hover:text-primary transition-colors truncate">
+                        {name}
+                    </CardTitle>
+                    <Badge
+                        variant="outline"
+                        className={cn(
+                            "shrink-0 font-semibold text-[10px] uppercase tracking-wider py-0.5 px-3 rounded-full border",
+                            CATEGORY_COLORS[categoryName] || 'bg-slate-50 text-slate-600 border-slate-100'
+                        )}
+                    >
+                        {categoryName}
                     </Badge>
                 </div>
+            </CardHeader>
 
-                <p className="line-clamp-2 text-sm text-slate-600 leading-relaxed max-h-full">
-                    {provider.description}
-                </p>
+            <CardContent className="flex-1 space-y-4 px-6 pt-2">
+
+
+                <div className="flex flex-wrap items-center gap-2">
+                    <div className="flex items-center gap-1.5 text-[11px] font-semibold text-slate-600 bg-slate-50 px-2 py-1 rounded-lg border border-slate-100">
+                        <Clock size={12} className="text-primary" />
+                        {experience}
+                    </div>
+                    <div className="flex items-center gap-1.5 text-[11px] font-semibold text-slate-600 bg-slate-50 px-2 py-1 rounded-lg border border-slate-100">
+                        <MapPin size={12} className="text-primary" />
+                        <span className="truncate max-w-[120px]">{location}</span>
+                    </div>
+                    <div className="flex items-center gap-1.5 text-[11px] font-semibold text-slate-600 bg-slate-50 px-2 py-1 rounded-lg border border-slate-100">
+                        <Star className="fill-primary text-primary" size={12} />
+                        <span>{rating} ({reviews})</span>
+                    </div>
+                </div>
+
+                <CardDescription className="line-clamp-2 text-sm text-slate-500 leading-relaxed italic">
+                    "{provider.description}"
+                </CardDescription>
             </CardContent>
 
-            {/* Footer */}
-            <CardFooter className="p-0 pt-2 mt-auto flex items-center justify-between gap-4">
+            <CardFooter className="pt-4 pb-6 border-t border-slate-50 mt-auto flex items-center justify-between gap-4 px-6">
                 <div className="flex flex-col">
-                    <span className="text-xl font-black text-slate-900 leading-none">{provider.price}</span>
+                    <span className="text-xl font-bold text-slate-900">{price}</span>
                 </div>
-                <button className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-primary/10 py-2.5 text-sm font-bold text-primary border border-primary/20 transition-all hover:bg-primary hover:text-primary-foreground active:scale-[0.98] min-w-[120px]">
+                <button className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-primary/10 py-2.5 text-sm font-bold text-primary transition-all hover:bg-primary hover:text-white hover:shadow-lg hover:shadow-primary/20 hover:-translate-y-0.5 active:translate-y-0 group/btn">
                     Book Now
-                    <ArrowRight size={16} />
+                    <ArrowRight size={16} className="transition-transform group-hover/btn:translate-x-1" />
                 </button>
             </CardFooter>
         </Card>

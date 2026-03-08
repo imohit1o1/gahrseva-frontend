@@ -14,6 +14,7 @@ import { ServiceProviderLayout, serviceProviderBeforeLoad } from "../pages/servi
 import ServiceProviderDashboard from "../pages/service-provider/ServiceProviderDashboard";
 import ServiceProviderBookings from "../pages/service-provider/ServiceProviderBookings";
 import { useAuthStore } from "../store/authStore";
+import { serviceProvidersSearchSchema } from "../schemas/provider";
 
 import { PublicLayout } from "./PublicLayout";
 
@@ -76,6 +77,7 @@ export const routeTree = rootRoute.addChildren([
             getParentRoute: () => publicRoute,
             path: "/service-providers",
             component: ServiceProviders,
+            validateSearch: (search) => serviceProvidersSearchSchema.parse(search),
         }),
     ]),
     dashboardRoute,

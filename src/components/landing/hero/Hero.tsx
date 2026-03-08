@@ -8,15 +8,32 @@ import {
     DropdownMenuItem,
     DropdownMenuTrigger,
 } from '../../ui/dropdown-menu';
-import { SERVICE_TAGS, TRUST_BADGES } from '../../../constants';
+import { useNavigate } from '@tanstack/react-router';
+import { SERVICE_TAGS, TRUST_BADGES, NAV_LINKS } from '../../../constants';
 import { useCategories } from '../../../hooks/useCategories';
 import { LeftIllustration } from './LeftIllustration';
 import { RightIllustration } from './RightIllustration';
 
+
 export function Hero() {
+    const navigate = useNavigate();
     const { categories } = useCategories();
-    const [service, setService] = useState('');
+    const [serviceName, setServiceName] = useState('');
+    const [serviceSlug, setServiceSlug] = useState('');
     const [location, setLocation] = useState('');
+
+    const handleSearch = (options?: { category_slug?: string; search?: string }) => {
+        const finalCategory = options?.category_slug ?? serviceSlug;
+        const finalSearch = options?.search ?? location;
+
+        navigate({
+            to: `${NAV_LINKS[2].href}`,
+            search: {
+                category_slug: finalCategory || undefined,
+                search: finalSearch || undefined,
+            },
+        });
+    };
 
     return (
         <section className="relative flex min-h-[calc(100vh-8rem)] flex-col justify-center text-center">
@@ -51,8 +68,8 @@ export function Hero() {
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <button className="flex flex-1 items-center justify-between gap-2 rounded-lg border border-border/60 bg-background px-4 py-2.5 text-sm hover:border-primary/40 focus:outline-none">
-                                <span className={service ? 'text-foreground' : 'text-muted-foreground'}>
-                                    {service || 'Select a service'}
+                                <span className={serviceName ? 'text-foreground' : 'text-muted-foreground'}>
+                                    {serviceName || 'Select a service'}
                                 </span>
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="shrink-0 text-muted-foreground"><path d="m6 9 6 6 6-6" /></svg>
                             </button>
@@ -61,7 +78,11 @@ export function Hero() {
                             {categories?.map((s) => (
                                 <DropdownMenuItem
                                     key={s._id}
-                                    onClick={() => setService(s.name)}
+                                    onClick={() => {
+                                        setServiceName(s.name);
+                                        setServiceSlug(s.slug);
+                                        handleSearch({ category_slug: s.slug });
+                                    }}
                                 >
                                     {s.name}
                                 </DropdownMenuItem>
@@ -77,12 +98,15 @@ export function Hero() {
                             placeholder="Enter your location"
                             value={location}
                             onChange={(e) => setLocation(e.target.value)}
+                            onKeyDown={(e) => {
+                                if (e.key === 'Enter') handleSearch();
+                            }}
                             className="pl-9 py-5"
                         />
                     </div>
 
                     {/* CTA */}
-                    <Button className="shrink-0 px-6">
+                    <Button className="shrink-0 px-6" onClick={() => handleSearch()}>
                         Book Now
                     </Button>
                 </div>

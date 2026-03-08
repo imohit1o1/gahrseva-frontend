@@ -1,5 +1,3 @@
-import { CATEGORIES } from "@/constants";
-
 export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL as string;
 
 const API_PREFIX = '/api/v1';
@@ -18,8 +16,15 @@ export const ENDPOINTS = {
   },
   USER: {
     ANALYTICS: `${API_PREFIX}/user/analytics`,
+    PROVIDERS: `${API_PREFIX}/service-provider/list`,
+    PROVIDER_BY_ID: (id: string) => `${API_PREFIX}/service-provider/${id}`,
   },
   SERVICE_PROVIDER: {
+    PROFILE: `${API_PREFIX}/service-provider/profile`,
+    AVAILABILITY: `${API_PREFIX}/service-provider/profile/availability`,
+    BOOKINGS: `${API_PREFIX}/service-provider/bookings`,
+    UPDATE_BOOKING_STATUS: (id: string) => `${API_PREFIX}/service-provider/bookings/${id}/status`,
+    REVIEWS: `${API_PREFIX}/service-provider/reviews`,
     ANALYTICS: `${API_PREFIX}/service-provider/analytics`
   },
   CATEGORIES: {
