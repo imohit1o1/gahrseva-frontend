@@ -1,16 +1,16 @@
 import { Twitter, Instagram, Facebook, LayoutDashboard, LogOut } from 'lucide-react';
 
 export const LOGO = {
-    icon: '/src/assets/logo/gharseva-logo.webp',
-    full: '/src/assets/logo/full-gharseva-logo.webp'
+    icon: '/assets/logo/gharseva-logo.webp',
+    full: '/assets/logo/full-gharseva-logo.webp'
 };
 
 export const HERO = {
-    left_illustration: '/src/assets/hero/left_illustrations/hero_cleaning.webp',
-    left_blob: '/src/assets/hero/left_illustrations/left_blob.webp',
-    right_illustration_1: '/src/assets/hero/right_illustrations/hero_repairs.webp',
-    right_illustration_2: '/src/assets/hero/right_illustrations/hero_appliance.webp',
-    right_blob: '/src/assets/hero/right_illustrations/right_blob.webp',
+    left_illustration: '/assets/hero/left_illustrations/hero_cleaning.webp',
+    left_blob: '/assets/hero/left_illustrations/left_blob.webp',
+    right_illustration_1: '/assets/hero/right_illustrations/hero_repairs.webp',
+    right_illustration_2: '/assets/hero/right_illustrations/hero_appliance.webp',
+    right_blob: '/assets/hero/right_illustrations/right_blob.webp',
 }
 
 export const CATEGORIES_LIST = [
@@ -77,14 +77,14 @@ export const PROFILE_DROPDOWN = [
 export const SERVICE_TAGS = ['Electricians', 'Plumbers', 'Cleaning', 'Appliance Repair'];
 
 export const CATEGORIES = [
-    { label: 'Home Cleaning', slug: 'home-cleaning', image: '/src/assets/categories/cat_cleaning.webp', href: '/service-providers' },
-    { label: 'Plumbing', slug: 'plumbing', image: '/src/assets/categories/cat_plumbing.webp', href: '/service-providers' },
-    { label: 'Electrical', slug: 'electrical', image: '/src/assets/categories/cat_electrical.webp', href: '/service-providers' },
-    { label: 'Carpentry', slug: 'carpentry', image: '/src/assets/categories/cat_carpentry.webp', href: '/service-providers' },
-    { label: 'Painting', slug: 'painting', image: '/src/assets/categories/cat_painting.webp', href: '/service-providers' },
-    { label: 'Appliance Repair', slug: 'appliance-repair', image: '/src/assets/categories/cat_appliance.webp', href: '/service-providers' },
-    { label: 'Pest Control', slug: 'pest-control', image: '/src/assets/categories/cat_pest_control.webp', href: '/service-providers' },
-    { label: 'Gardening', slug: 'gardening', image: '/src/assets/categories/cat_gardening.webp', href: '/service-providers' },
+    { label: 'Home Cleaning', slug: 'home-cleaning', image: '/assets/categories/cat_cleaning.webp', href: '/service-providers' },
+    { label: 'Plumbing', slug: 'plumbing', image: '/assets/categories/cat_plumbing.webp', href: '/service-providers' },
+    { label: 'Electrical', slug: 'electrical', image: '/assets/categories/cat_electrical.webp', href: '/service-providers' },
+    { label: 'Carpentry', slug: 'carpentry', image: '/assets/categories/cat_carpentry.webp', href: '/service-providers' },
+    { label: 'Painting', slug: 'painting', image: '/assets/categories/cat_painting.webp', href: '/service-providers' },
+    { label: 'Appliance Repair', slug: 'appliance-repair', image: '/assets/categories/cat_appliance.webp', href: '/service-providers' },
+    { label: 'Pest Control', slug: 'pest-control', image: '/assets/categories/cat_pest_control.webp', href: '/service-providers' },
+    { label: 'Gardening', slug: 'gardening', image: '/assets/categories/cat_gardening.webp', href: '/service-providers' },
 ];
 
 // export const PROBLEM_POINTS = [
