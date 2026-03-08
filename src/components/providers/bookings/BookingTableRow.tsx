@@ -1,8 +1,9 @@
-import { Calendar, MapPin, IndianRupee, Loader2, CheckCircle2, XCircle, Clock, PlayCircle } from 'lucide-react';
+import { Calendar, MapPin, IndianRupee, Loader2, CheckCircle2, XCircle, Clock, PlayCircle, Eye } from 'lucide-react';
 import type { Booking } from '../../../types/booking';
 import { TableCell, TableRow } from "../../ui/table";
 import { Badge } from "../../ui/badge";
 import { cn } from "../../../lib/utils";
+import { Link } from "@tanstack/react-router";
 
 interface BookingTableRowProps {
     booking: Booking;
@@ -79,6 +80,15 @@ export function BookingTableRow({ booking, onUpdateStatus, isUpdating }: Booking
 
             <TableCell className="px-6 py-4 text-right h-auto">
                 <div className="flex items-center justify-end gap-2">
+                    <Link
+                        to="/service-provider/bookings/$bookingId"
+                        params={{ bookingId: booking._id }}
+                        className="p-2 hover:bg-muted rounded-lg transition-colors text-muted-foreground hover:text-primary shrink-0"
+                        title="View Details"
+                    >
+                        <Eye size={16} />
+                    </Link>
+
                     {booking.status === 'requested' && (
                         <>
                             <button

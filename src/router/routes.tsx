@@ -14,6 +14,7 @@ import AdminReviews from "../pages/admin/AdminReviews";
 import { ServiceProviderLayout, serviceProviderBeforeLoad } from "../pages/service-provider/ServiceProviderLayout";
 import ServiceProviderDashboard from "../pages/service-provider/ServiceProviderDashboard";
 import ServiceProviderBookings from "../pages/service-provider/ServiceProviderBookings";
+import ServiceProviderBookingDetail from "../pages/service-provider/ServiceProviderBookingDetail";
 import { useAuthStore } from "../store/authStore";
 import { serviceProvidersSearchSchema } from "../schemas/provider";
 
@@ -143,6 +144,11 @@ export const routeTree = rootRoute.addChildren([
             getParentRoute: () => serviceProviderRoute,
             path: "/bookings",
             component: ServiceProviderBookings,
+        }),
+        createRoute({
+            getParentRoute: () => serviceProviderRoute,
+            path: "/bookings/$bookingId",
+            component: ServiceProviderBookingDetail,
         }),
     ]),
 ]);

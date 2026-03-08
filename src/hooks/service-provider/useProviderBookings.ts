@@ -5,17 +5,29 @@ import type { ApiResponse } from '../../types/apiResponse';
 import type { Booking } from '../../types/booking';
 import { toast } from 'sonner';
 
-export const useProviderBookings = (status?: string) => {
+export const useProviderBookings = (params: { status?: string, page?: number, limit?: number } = {}) => {
     return useQuery({
-        queryKey: ['provider', 'bookings', status],
+        queryKey: ['provider', 'bookings', params],
         queryFn: async () => {
-            const params = status ? { status } : {};
             const { data } = await api.get<ApiResponse<{ bookings: Booking[], pagination: any }>>(
                 ENDPOINTS.SERVICE_PROVIDER.BOOKINGS,
                 { params }
             );
-            return data; // Now returns { bookings: Booking[], pagination: any }
+            return data;
         },
+    });
+};
+
+export const useProviderBookingById = (id: string) => {
+    return useQuery({
+        queryKey: ['provider', 'booking', id],
+        queryFn: async () => {
+            const { data } = await api.get<ApiResponse<Booking>>(
+                ENDPOINTS.SERVICE_PROVIDER.BOOKING_BY_ID(id)
+            );
+            return data;
+        },
+        enabled: !!id
     });
 };
 
@@ -23,8 +35,14 @@ export const useUpdateBookingStatus = () => {
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: async ({ id, status, reason }: { id: string, status: string, reason?: string }) => {
+        mutationFn: async ({ id, status, reason, before_image, after_image }: { id: string, status: string, reason?: string, before_image?: string, after_image?: string }) => {
             let endpoint;
+            let body: any = {};
+
+            if (reason) body.cancel_reason = reason;
+            if (before_image) body.before_image = before_image;
+            if (after_image) body.after_image = after_image;
+
             switch (status) {
                 case 'accepted': endpoint = ENDPOINTS.SERVICE_PROVIDER.ACCEPT_BOOKING(id); break;
                 case 'rejected': endpoint = ENDPOINTS.SERVICE_PROVIDER.REJECT_BOOKING(id); break;
@@ -36,12 +54,15 @@ export const useUpdateBookingStatus = () => {
 
             const { data } = await api.patch<ApiResponse<Booking>>(
                 endpoint,
-                reason ? { cancel_reason: reason } : {}
+                body
             );
             return data;
         },
         onSuccess: (_data, variables) => {
             queryClient.invalidateQueries({ queryKey: ['provider', 'bookings'] });
+            if (variables.id) {
+                queryClient.invalidateQueries({ queryKey: ['provider', 'booking', variables.id] });
+            }
             toast.success('Booking Status Updated', {
                 description: `The booking status was successfully updated to ${variables.status}.`
             });
