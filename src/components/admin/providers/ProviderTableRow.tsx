@@ -82,7 +82,7 @@ export function ProviderTableRow({
                 <div className="flex items-center gap-1.5 py-1.5 px-3 rounded-lg bg-primary/10 border border-primary/20 w-fit">
                     <IndianRupee size={12} className="text-primary" strokeWidth={3} />
                     <span className="text-sm font-black text-primary tracking-tight">
-                        {provider.base_price}/hr
+                        {provider.base_price}
                     </span>
                 </div>
             </TableCell>
