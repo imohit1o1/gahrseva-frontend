@@ -5,6 +5,7 @@ import ServiceProviders from "../pages/ServiceProviders";
 import ServiceProviderDetails from "../pages/ServiceProviderDetails";
 import ServiceProviderRegister from "../pages/ServiceProviderRegister";
 import Bookings from "../pages/Bookings";
+import NotFound from "../pages/NotFound";
 import { AdminLayout, adminBeforeLoad } from "../pages/admin/AdminLayout";
 import AdminDashboard from "../pages/admin/AdminDashboard";
 import AdminUsers from "../pages/admin/AdminUsers";
@@ -23,6 +24,7 @@ import { PublicLayout } from "./PublicLayout";
 
 const rootRoute = createRootRoute({
     component: RootLayout,
+    notFoundComponent: NotFound,
 });
 
 const publicRoute = createRoute({
