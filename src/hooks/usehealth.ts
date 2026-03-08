@@ -7,5 +7,5 @@ import type { HealthResponse } from '../types/health';
 export const useHealth = () =>
   useQuery({
     queryKey: [ENDPOINTS.HEALTH],
-    queryFn: () => api.get<HealthResponse>(ENDPOINTS.HEALTH).then((res) => res.data),
+    queryFn: () => api.get<HealthResponse>(ENDPOINTS.HEALTH),
   });

@@ -1,4 +1,3 @@
-import * as React from 'react';
 import { Quote, Star } from 'lucide-react';
 import { TESTIMONIALS } from '../../../constants';
 import { SectionLayout } from '../section-layout/SectionLayout';

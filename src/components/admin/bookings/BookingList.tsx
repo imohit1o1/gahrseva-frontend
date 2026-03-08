@@ -35,13 +35,13 @@ export function BookingList({ bookings, isLoading }: BookingListProps) {
                                     </div>
                                     <h3 className="text-lg font-bold">Service Booking</h3>
                                     <div className="flex items-center gap-4 text-xs text-muted-foreground">
-                                        <div className="flex items-center gap-1">
+                                    <div className="flex items-center gap-1">
                                             <Calendar size={14} />
-                                            <span>{new Date(booking.scheduled_at).toLocaleDateString()}</span>
+                                            <span>{new Date(booking.schedule_at).toLocaleDateString()}</span>
                                         </div>
                                         <div className="flex items-center gap-1">
                                             <Clock size={14} />
-                                            <span>{new Date(booking.scheduled_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                                            <span>{new Date(booking.schedule_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
                                         </div>
                                     </div>
                                 </div>
@@ -52,12 +52,18 @@ export function BookingList({ bookings, isLoading }: BookingListProps) {
                                     <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground mb-1">Location</p>
                                     <div className="flex items-center gap-1 text-xs font-medium">
                                         <MapPin size={14} className="text-primary" />
-                                        <span className="line-clamp-1 max-w-[200px]">{booking.address}</span>
+                                        <span className="line-clamp-1 max-w-[200px]">
+                                            {booking.address
+                                                ? `${booking.address.area ?? ''}${booking.address.area && (booking.address.city || booking.address.pincode) ? ', ' : ''}${booking.address.city ?? ''}${
+                                                      booking.address.pincode ? ` - ${booking.address.pincode}` : ''
+                                                  }`
+                                                : 'Address not available'}
+                                        </span>
                                     </div>
                                 </div>
                                 <div className="flex flex-col text-right">
                                     <p className="text-[10px] font-black uppercase tracking-widest text-muted-foreground mb-1">Amount</p>
-                                    <p className="text-xl font-black text-foreground">₹{booking.total_price}</p>
+                                    <p className="text-xl font-black text-foreground">₹{booking.price}</p>
                                 </div>
                                 <div className="flex gap-2 w-full sm:w-auto">
                                     <button className="flex-1 sm:flex-none px-4 py-2 rounded-xl border border-border/60 text-xs font-bold hover:bg-accent transition-colors">Details</button>

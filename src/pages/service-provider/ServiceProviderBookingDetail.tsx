@@ -13,7 +13,6 @@ import {
 } from "lucide-react";
 import { useProviderBookingById } from "../../hooks/service-provider/useProviderBookings";
 import { Badge } from "../../components/ui/badge";
-import { SectionLayout } from "@/components/landing/section-layout/SectionLayout";
 import { BookingProgressStepper } from "@/components/service-provider/BookingProgressStepper";
 import { BookingActionsPanel } from "@/components/service-provider/BookingActionsPanel";
 import { cn } from "../../lib/utils";

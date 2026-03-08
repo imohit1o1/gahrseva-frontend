@@ -64,7 +64,7 @@ api.interceptors.response.use(
       }
       originalRequest.headers.Authorization = `Bearer ${newToken}`;
 
-      return api(originalRequest);
+      return api.request(originalRequest);
     } catch (refreshErr) {
       handleLogout();
       return Promise.reject(refreshErr);
